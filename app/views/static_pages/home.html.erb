@@ -64,117 +64,49 @@
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navigation" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a href="index.html" class="logo">
-                    <!--<img src="img/logos/logo.png" alt="logo">-->
-                    <h5> SBI</h5>
+                    <%= link_to image_tag("logo3.png") %>
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
+                
                 <ul class="nav navbar-nav">
-                    <li class="dropdown active">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
-                            Home<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
-                            <li><a href="index-4.html">Home 4</a></li>
-                        </ul>
+                    <li>
+                        <a id="header-search-btn" ></a>
                     </li>
-                    <li class="dropdown">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
-                            Rooms<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="rooms-col-1.html">1 Column</a></li>
-                            <li><a href="rooms-col-2.html">2 Column</a></li>
-                            <li><a href="rooms-col-3.html">3 Column</a></li>
-                            <li><a href="rooms-col-4.html">4 Column</a></li>
-                            <li><a href="rooms-details.html">Rooms Details</a></li>
-                            <li><a href="rooms-details-2.html">Rooms Details 2</a></li>
-                        </ul>
+                    <li>
+                        <a id="header-search-btn" >HOME</a>
                     </li>
-                    <li class="dropdown">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
-                            Pages<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a tabindex="0">Gallery</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="gallery-3column.html">Gallery 3 Column</a></li>
-                                    <li><a href="gallery-4column.html">Gallery 4 Column</a></li>
-                                    <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="0">About Us</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="about-2.html">About Us 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="booking-system.html">Booking System</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="0">Staff</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="staff.html">Staff</a></li>
-                                    <li><a href="staff-2.html">Staff 2</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="0">Events</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="events.html">Events</a></li>
-                                    <li><a href="events-right-sidebar.html">Events Right Sidebar</a></li>
-                                    <li><a href="events-details.html">Events Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                            <li><a href="typography.html">Typography</a></li>
-                            <li><a href="faq.html">Faq</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                            <li><a href="forgot-password.html">Forgot Password</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                        </ul>
+                    <li>
+                        <a id="header-search-btn" >CONTACT</a>
                     </li>
-                    <li class="dropdown">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
-                            Contact<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="contact-2.html">Contact 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
-                            Blog<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-full-width.html">Blog Fullwidth</a></li>
-                            <li><a href="blog-creative.html">Blog Creative</a></li>
-                            <li><a href="blog-details.html">Blog Detail</a></li>
-                        </ul>
-                    </li>
+                    <!--<li class="dropdown active">-->
+                    <!--    <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">-->
+                    <!--        Home<span class="caret"></span>-->
+                    <!--    </a>-->
+                    <!--    <ul class="dropdown-menu">-->
+                    <!--        <li><a href="index.html">Home 1</a></li>-->
+                    <!--        <li><a href="index-2.html">Home 2</a></li>-->
+                    <!--        <li><a href="index-3.html">Home 3</a></li>-->
+                    <!--        <li><a href="index-4.html">Home 4</a></li>-->
+                    <!--    </ul>-->
+                    <!--</li>-->
+                    
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
                     <li>
-                        <input type="text" class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" placeholder="search movie here">
+                        <input type="text" class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" placeholder="search movie here" >
                     </li>
                     <li>
                         <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
+                    </li>
+                    <li>
+                        <a id="header-search-btn" >sign up</a>
+                    </li>
+                    <li>
+                        <a id="header-search-btn" >login</a>
                     </li>
                 </ul>
             </div>
@@ -199,11 +131,7 @@
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Booking System</h1>
-            <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
-                <li class="active">Booking System</li>
-            </ul>
+            <h1>Movie Review System</h1>
         </div>
     </div>
 </div>
@@ -229,22 +157,20 @@
                                         <div class="search-contents">
                                             <div class="search-your-rooms">
                                                 <h3 class="hidden-xs hidden-sm">Search</h3>
-                                                <h2 class="hidden-xs hidden-sm">Your <span>Rooms</span></h2>
-                                                <h2 class="hidden-lg hidden-md">Search Your <span>Rooms</span></h2>
                                             </div>
 
                                             <div class="search-your-details">
                                                 <div class="form-group">
-                                                    <input type="text" class="btn-default datepicker" placeholder="Check In">
+                                                    <input type="text" class="btn-default datepicker" placeholder="movie name">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <input type="text" class="btn-default datepicker" placeholder="Check Out">
+                                                    <input type="text" class="btn-default datepicker" placeholder="character name">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields form-control-2" name="room">
-                                                        <option>Room</option>
+                                                        <option>year</option>
                                                         <option>Single Room</option>
                                                         <option>Double Room</option>
                                                         <option>Deluxe Room</option>
@@ -253,7 +179,7 @@
 
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields form-control-2" name="adults">
-                                                        <option>Adult</option>
+                                                        <option>nation</option>
                                                         <option>1</option>
                                                         <option>2</option>
                                                         <option>3</option>
@@ -264,7 +190,7 @@
 
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields form-control-2" name="children">
-                                                        <option>Child</option>
+                                                        <option>character</option>
                                                         <option>1</option>
                                                         <option>2</option>
                                                         <option>3</option>
@@ -283,7 +209,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="row">
-                                        <div class="col-lg-12"><h3 class="booking-heading-2 black-color">Available Rooms</h3></div>
+                                        <div class="col-lg-12"><h3 class="booking-heading-2 black-color">Best Ranking</h3></div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="hotel-box">
                                                 <!--header -->
@@ -304,7 +230,7 @@
                                                         </div>
                                                     </div>
                                                     <h3>
-                                                        <a href="rooms-details.html">Luxury Room</a>
+                                                        <a href="rooms-details.html">Luxury </a>
                                                     </h3>
                                                     <h5 class="location">
                                                         <a href="rooms-details.html">
@@ -313,7 +239,7 @@
                                                     </h5>
                                                     <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <br/>
-                                                    <a class="btn btn-sm btn-theme next-step">Select Room</a>
+                                                    <a class="btn btn-sm btn-theme next-step">View More</a>
                                                 </div>
                                             </div>
                                             <div class="hotel-box">
@@ -334,7 +260,7 @@
                                                         </div>
                                                     </div>
                                                     <h3>
-                                                        <a href="rooms-details.html">Single Room</a>
+                                                        <a href="rooms-details.html">Single </a>
                                                     </h3>
                                                     <h5 class="location">
                                                         <a href="rooms-details.html">
@@ -343,7 +269,7 @@
                                                     </h5>
                                                     <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <br/>
-                                                    <a class="btn btn-sm btn-theme next-step">Select Room</a>
+                                                    <a class="btn btn-sm btn-theme next-step">View More </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -366,7 +292,7 @@
                                                         </div>
                                                     </div>
                                                     <h3>
-                                                        <a href="rooms-details.html">Double Room</a>
+                                                        <a href="rooms-details.html">Double </a>
                                                     </h3>
                                                     <h5 class="location">
                                                         <a href="rooms-details.html">
@@ -375,7 +301,7 @@
                                                     </h5>
                                                     <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <br/>
-                                                    <a class="btn btn-sm btn-theme next-step">Select Room</a>
+                                                    <a class="btn btn-sm btn-theme next-step">View More</a>
                                                 </div>
                                             </div>
                                             <div class="hotel-box">
@@ -396,7 +322,7 @@
                                                         </div>
                                                     </div>
                                                     <h3>
-                                                        <a href="rooms-details.html">Single Room</a>
+                                                        <a href="rooms-details.html">Single </a>
                                                     </h3>
                                                     <h5 class="location">
                                                         <a href="rooms-details.html">
@@ -405,7 +331,7 @@
                                                     </h5>
                                                     <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <br/>
-                                                    <a class="btn btn-sm btn-theme next-step">Select Room</a>
+                                                    <a class="btn btn-sm btn-theme next-step">View More</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,7 +537,6 @@
                                 <div class="col-lg-8 col-md-8 col-xs-12">
                                     <div class="contact-form sidebar-widget">
                                         <h3 class="booking-heading-2 black-color">Billing Address</h3>
-                                        <div class="row mb-30">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 <div class="form-group fullname">
                                                     <label>First Name</label>
@@ -932,9 +857,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item">
                         <div class="footer-logo">
-                            <a href="index.html">
-                                <img src="img/logos/white-logo.png" alt="white-logo">
-                            </a>
+                            <%= link_to image_tag("white-logo.png") %>
                         </div>
                         <% if user_signed_in? %>
                             <h3>Hello, <%= current_user.email %></h3>
