@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   end
   def create
     @movie = Movie.new movie_params
-    byebug
+    # byebug
     if @movie.save
       params[:movie][:characters_attributes].each do |a|
         act = Actor.find_by(name: a[1][:name])
@@ -19,10 +19,10 @@ class MoviesController < ApplicationController
           mc.save
         end
       end
-      flash[:success] = "successful"
+      flash[:success] = "管理者に映画を進めました"
       redirect_to root_path
     else
-      flash[:danger] = "failed"
+      flash[:danger] = "エラーが発生しました、もう一度お試しください"
       redirect_to root_path
     end
   end
