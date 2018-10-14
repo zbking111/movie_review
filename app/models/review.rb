@@ -5,6 +5,6 @@ class Review < ApplicationRecord
   has_many :review_actions, foreign_key: "review_id"
   has_many :maked_action_users, through: :review_actions, source: :user
 
-  validates :user_id, presence: true
+  # validates :user_id, presence: true
   validates :movie_id, presence: true
 end
