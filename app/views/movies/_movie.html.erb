@@ -1,0 +1,39 @@
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div class="hotel-box">
+    <!--header -->
+    <div class="header clearfix">
+      <%#= link_to image_tag("phim3.jpg", class: "img-responsive") %>
+      <%= image_tag movie.picture_url, class: "img-movie"%>
+
+    </div>
+    <!-- Detail -->
+    <div class="detail clearfix">
+
+
+      <h3>
+        <a href="rooms-details.html">
+          <%= movie.name %>
+        </a>
+        <div class="pr">
+          <div class="rating">
+            <%= movie.rate_score.times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+          </div>
+        </div>
+
+      </h3>
+      <h5 class="location">
+        <a href="rooms-details.html">
+          <i class="fa fa-calendar"></i>
+          <%= movie.date.year %>年<%= movie.date.month %>月<%= movie.date.day %>日
+        </a>
+      </h5>
+      <p>
+        <%= movie.info %>
+      </p>
+      <br/>
+      <a class="btn btn-sm btn-theme next-step">詳細</a>
+    </div>
+  </div>
+</div>

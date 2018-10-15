@@ -23,7 +23,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
           <li>
-            <%= search_form_for @q, url: {controller: "static_pages", action: "search"}, html: {method: :post} do |sf| %>
+            <%#= search_form_for @q, url: {controller: "static_pages", action: "search"}, html: {method: :post} do |sf| %>
+            <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
               <%= sf.search_field :name_cont, class: "btn-navbar btn btn-sm btn-theme-sm-outline btn-round",
                                   placeholder: "映画を検索" %>
             <% end %>
