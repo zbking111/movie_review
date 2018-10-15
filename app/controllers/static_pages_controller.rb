@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :create_movie, only: [:home, :search]
   def home
-    @movie = Movie.new
     find_movie
   end
 
@@ -11,8 +11,11 @@ class StaticPagesController < ApplicationController
   private
 
   def find_movie
-    @q = Movie.search(params[:q])
-    @movies = @q.result(distinct: true)
+    @movies = @q.result(distinct: true).includes(:actors)
   end
 
+  def create_movie
+    @movie = Movie.new
+    @movie.rate_score = 0
+  end
 end

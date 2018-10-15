@@ -2496,9 +2496,9 @@ footer ul {
 }
 
 .hotel-box .pr .rating{
-    font-size: 10px;
+    font-size: 15px;
     text-align: right;
-    margin-top: 5px;
+    margin-top: 75px;
     color: #ffc12b;
 }
 
@@ -2554,7 +2554,6 @@ footer ul {
 .hotel-box-list {
     background: #FFFFFF;
     margin: 0 auto 30px;
-    float: left;
 }
 
 .hotel-box-list:hover {
@@ -2597,7 +2596,7 @@ footer ul {
 
 .hotel-box-list .price {
     font-size: 20px;
-    color: #5a5959;
+    color: #5a0b00;
 }
 
 .fecilities {
@@ -5976,4 +5975,12 @@ span.round-tab:hover i {
         margin-bottom: 30px;
         font-size: 16px;
     }
+}
+.img-movie {
+    height: 257.14px; !important;
+    width: 100%;
+}
+
+.margin-left-18{
+    margin-left: 18px;
 }
