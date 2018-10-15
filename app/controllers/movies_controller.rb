@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   def show
   	@movie = Movie.find(params[:id])
+  	find_movie
   end
   def create
     @movie = Movie.new movie_params
@@ -30,5 +31,10 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit :name, :info, :date, :picture, characters_attribute: [:name]
+  end
+
+  def find_movie
+    @q = Movie.search(params[:q])
+    @movies = @q.result(distinct: true)
   end
 end
