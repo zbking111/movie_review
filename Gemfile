@@ -13,6 +13,7 @@ gem "bootstrap-sass", "3.3.7"
 gem "jquery-rails"
 gem "nested_form"
 gem "carrierwave"
+gem "ransack"
 
 group :development, :test do
   gem "byebug"

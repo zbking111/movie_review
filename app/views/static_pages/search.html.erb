@@ -61,136 +61,8 @@
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12">
                 <div class="row">
-                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">Best Ranking</h3></div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hotel-box">
-                      <!--header -->
-                      <div class="header clearfix">
-                        <!--<img src="badman.png" alt="img-1" class="img-responsive">-->
-                        <%= link_to image_tag("phim1.jpg", class: "img-responsive") %>
-                      </div>
-                      <!-- Detail -->
-                      <div class="detail clearfix">
-                        <div class="pr">
-                          $567<sub>.99/Night</sub>
-                          <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                          </div>
-                        </div>
-                        <h3>
-                          <a href="rooms-details.html">Luxury </a>
-                        </h3>
-                        <h5 class="location">
-                          <a href="rooms-details.html">
-                            <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                          </a>
-                        </h5>
-                        <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore magna aliqua.</p>
-                        <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
-                      </div>
-                    </div>
-                    <div class="hotel-box">
-                      <!--header -->
-                      <div class="header clearfix">
-                        <%= link_to image_tag("phim2.jpg", class: "img-responsive") %>
-                      </div>
-                      <!-- Detail -->
-                      <div class="detail clearfix">
-                        <div class="pr">
-                          $567<sub>.99/Night</sub>
-                          <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                          </div>
-                        </div>
-                        <h3>
-                          <a href="rooms-details.html">Single </a>
-                        </h3>
-                        <h5 class="location">
-                          <a href="rooms-details.html">
-                            <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                          </a>
-                        </h5>
-                        <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore magna aliqua.</p>
-                        <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hotel-box">
-                      <!--header -->
-                      <div class="header clearfix">
-                        <%= link_to image_tag("phim3.jpg", class: "img-responsive") %>
-                      </div>
-                      <!-- Detail -->
-                      <div class="detail clearfix">
-                        <div class="pr">
-                          $567<sub>.99/Night</sub>
-                          <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                          </div>
-                        </div>
-                        <h3>
-                          <a href="rooms-details.html">Double </a>
-                        </h3>
-                        <h5 class="location">
-                          <a href="rooms-details.html">
-                            <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                          </a>
-                        </h5>
-                        <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore magna aliqua.</p>
-                        <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
-                      </div>
-                    </div>
-                    <div class="hotel-box">
-                      <!--header -->
-                      <div class="header clearfix">
-                        <%= link_to image_tag("phim4.jpg", class: "img-responsive") %>
-                      </div>
-                      <!-- Detail -->
-                      <div class="detail clearfix">
-                        <div class="pr">
-                          $567<sub>.99/Night</sub>
-                          <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                          </div>
-                        </div>
-                        <h3>
-                          <a href="rooms-details.html">Single </a>
-                        </h3>
-                        <h5 class="location">
-                          <a href="rooms-details.html">
-                            <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                          </a>
-                        </h5>
-                        <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore magna aliqua.</p>
-                        <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">Result</h3></div>
+                  <%= @movies.map(&:name).join(', ') %>
                 </div>
               </div>
             </div>
@@ -862,3 +734,5 @@
   </div>
 </div>
 <!-- Copy end right-->
+
+
