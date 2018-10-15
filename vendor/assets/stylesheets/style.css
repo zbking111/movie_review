@@ -2459,6 +2459,7 @@ footer ul {
     padding: 20px 25px 25px;
     position: relative;
     display: inline-block;
+    width: 360px;
 }
 
 .hotel-box .detail p {

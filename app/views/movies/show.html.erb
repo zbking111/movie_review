@@ -1,120 +1,126 @@
-
 <main class="main-content">
-    <div class="container">
-     <div class="page">
+  <div class="container">
+    <div class="page">
       <div class="content">
-       <div class="row">
-        <div class="col-md-4">
-          <div class="search-area-box-2 search-booking-box bg-grey">
-                  <div class="search-contents">
-                    <div class="search-your-rooms">
-                      <h2 class="hidden-xs hidden-sm">詳細検索</h2>
-                    </div>
-
-                    <div class="search-your-details">
-                      <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
-                        <h5>映画の名前</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "movie name" %>
-                        </div>
-
-                        <h5>レート</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "rate score >=" %>
-                        </div>
-
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "rate score <=" %>
-                        </div>
-
-                        <h5>公開日 >=</h5>
-                        <div class="form-group">
-                          <%= sf.date_field :date_gteq, class: "btn-default datepicker", placeholder: "date >=" %>
-                        </div>
-
-
-                        <div class="form-group">
-                          <%= sf.submit class: "search-button btn-theme" %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="search-area-box-2 search-booking-box bg-grey">
+              <div class="search-contents">
+                <div class="search-your-rooms">
+                  <h2 class="hidden-xs hidden-sm">詳細検索</h2>
                 </div>
-        </div>
-        <div class="col-md-8">
-          <div style="background-color: #e1e2e3; border-radius: 4px;">
-            <center>映画情報</center>
+
+                <div class="search-your-details">
+                  <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
+                    <h5>映画の名前</h5>
+                    <div class="form-group">
+                      <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "名前を入力" %>
+                    </div>
+
+                    <h5>レート</h5>
+                    <div class="form-group">
+                      <%= sf.search_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "最小" %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= sf.search_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "最大" %>
+                    </div>
+
+                    <h5>公開日はこの日から</h5>
+                    <div class="form-group">
+                      <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
+                    </div>
+
+                    <h5>俳優</h5>
+                    <div class="form-group">
+                      <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優の名前" %>
+                    </div>
+
+
+                    <div class="form-group">
+                      <%= sf.submit class: "search-button btn-theme" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
-          <br>
+          <div class="col-md-8">
+            <div style="background-color: #e1e2e3; border-radius: 4px;">
+              <center>映画情報</center>
+            </div>
+            <br>
             <figure class="movie-poster">
-             <%= image_tag ( @movie.picture.url )%>
+              <%= image_tag (@movie.picture.url) %>
             </figure>
             <div class="movie-title">
-            <i class="fa fa-film" aria-hidden="true"></i>
-            <%= @movie.name %></div>
-          <ul class="movie-meta">
+              <i class="fa fa-film" aria-hidden="true"></i>
+              <%= @movie.name %></div>
+            <ul class="movie-meta">
 
-          <li>
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <strong>公開日：</strong> <%=(@movie.date)%>
-          </li>
-          <li>
-            <i class="fa fa-circle-o" aria-hidden="true"></i>
-            <strong>平均評価:</strong>
-           <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
-          </li>
-
-          <ul class="starring">
-              <li><strong>キャスト:</strong>
-                  <% @movie.actors.each do |actor| %>
-                  <span> <%= actor.name %></span>
-                  <% end %>
+              <li>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <strong>公開日：</strong> <%= (@movie.date) %>
               </li>
-          </ul>
-          <div style="background-color: #e1e2e3; border-radius: 4px;">
-            <center>解説</center>
-          </div>
-         <div class="movie-summary">
-          <p><%= @movie.info %></p>
-         </div>
+              <li>
+                <i class="fa fa-circle-o" aria-hidden="true"></i>
+                <strong>平均評価:</strong>
+                <div class="star-rating" title="Rated 4.00 out of 5">
+                  <span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
+              </li>
 
-         <div style="background-color: #e1e2e3; border-radius: 4px;">
-            <center>映画レビュー</center>
-          </div>
-          <br>
+              <ul class="starring">
+                <li><strong>キャスト:</strong>
+                  <% @movie.actors.each do |actor| %>
+                    <span> <%= actor.name %></span>
+                  <% end %>
+                </li>
+              </ul>
+              <div style="background-color: #e1e2e3; border-radius: 4px;">
+                <center>解説</center>
+              </div>
+              <div class="movie-summary">
+                <p><%= @movie.info %></p>
+              </div>
 
-   </ul>
+              <div style="background-color: #e1e2e3; border-radius: 4px;">
+                <center>映画レビュー</center>
+              </div>
+              <br>
+
+            </ul>
 
 
-  <div class="panel panel-white post panel-shadow">
-    <div class="post-heading">
-        <div class="pull-left image">
-            <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-        </div>
-        <div class="pull-left meta">
-            <div class="title h5">
-                <a href="#"><b>Nguyen Dang Hai</b></a>
-                made a post.
+            <div class="panel panel-white post panel-shadow">
+              <div class="post-heading">
+                <div class="pull-left image">
+                  <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                </div>
+                <div class="pull-left meta">
+                  <div class="title h5">
+                    <a href="#"><b>Nguyen Dang Hai</b></a>
+                    made a post.
+                  </div>
+                  <h6 class="text-muted time">1 minute ago</h6>
+                </div>
+              </div>
+              <div class="post-description">
+                <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js
+                  framework. Codes for developers and web designers</p>
+                <div class="stats">
+                  <a href="#" class="btn btn-default stat-item">
+                    <i class="fa fa-thumbs-up icon"></i>2
+                  </a>
+                  <a href="#" class="btn btn-default stat-item">
+                    <i class="fa fa-thumbs-down icon"></i>12
+                  </a>
+                </div>
+              </div>
             </div>
-            <h6 class="text-muted time">1 minute ago</h6>
-        </div>
-    </div>
-    <div class="post-description">
-        <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-        <div class="stats">
-            <a href="#" class="btn btn-default stat-item">
-                <i class="fa fa-thumbs-up icon"></i>2
-            </a>
-            <a href="#" class="btn btn-default stat-item">
-                <i class="fa fa-thumbs-down icon"></i>12
-            </a>
-        </div>
-    </div>
-</div>
-</div>
-</div> <!-- .row -->
+          </div>
+        </div> <!-- .row -->
 
-</div>
-</div>
-</div> <!-- .container -->
+      </div>
+    </div>
+  </div> <!-- .container -->
 </main>
