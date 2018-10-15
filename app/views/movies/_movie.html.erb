@@ -3,17 +3,15 @@
     <!--header -->
     <div class="header clearfix">
       <%#= link_to image_tag("phim3.jpg", class: "img-responsive") %>
-      <%= image_tag movie.picture_url, class: "img-movie"%>
+      <%= image_tag movie.picture_url, class: "img-movie" %>
 
     </div>
     <!-- Detail -->
-    <div class="detail clearfix">
-
-
+    <div class="detail ">
       <h3>
-        <a href="rooms-details.html">
-          <%= movie.name %>
-        </a>
+        <div>
+          <%= link_to movie.name, movie_path(movie.id) %>
+        </div>
         <div class="pr">
           <div class="rating">
             <%= movie.rate_score.times do %>
@@ -33,7 +31,9 @@
         <%= movie.info %>
       </p>
       <br/>
-      <a class="btn btn-sm btn-theme next-step">詳細</a>
+      <div class="btn btn-sm btn-theme next-step">
+        <%= link_to "詳細", movie_path(movie.id) %>
+      </div>
     </div>
   </div>
 </div>
