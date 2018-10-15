@@ -5,11 +5,13 @@ class MoviesController < ApplicationController
   end
   def create
     @movie = Movie.new movie_params
+    @movie.check = 0
+    @movie.rate_score = 0
     # byebug
     if @movie.save
       params[:movie][:characters_attributes].each do |a|
         act = Actor.find_by(name: a[1][:name])
-        if act.blank? 
+        if act.blank?
           r = Actor.new(name: a[1][:name])
           r.save
           mc = MovieCharacter.new movie_id: @movie.id, actor_id: r.id
@@ -26,7 +28,7 @@ class MoviesController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   private
 
   def movie_params

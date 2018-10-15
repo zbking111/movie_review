@@ -22,50 +22,12 @@
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <!-- Search area box 2 start -->
-                <div class="search-area-box-2 search-booking-box bg-grey">
-                  <div class="search-contents">
-                    <div class="search-your-rooms">
-                      <h2 class="hidden-xs hidden-sm">詳細検索</h2>
-                    </div>
-
-                    <div class="search-your-details">
-                      <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
-                        <h5>映画の名前</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "名前を入力" %>
-                        </div>
-
-                        <h5>レート</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "最小" %>
-                        </div>
-
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "最大" %>
-                        </div>
-
-                        <h5>公開日はこの日から</h5>
-                        <div class="form-group">
-                          <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
-                        </div>
-
-                        <h5>俳優</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優の名前" %>
-                        </div>
-
-                        <div class="form-group">
-                          <%= sf.submit "検索", class: "search-button btn-theme" %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+                <%= render "movies/search_form" %>
                 <!-- Search area box 2 end -->
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12">
                 <div class="row">
-                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">Best Ranking</h3></div>
+                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">最新映画</h3></div>
                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="hotel-box">
                       <!--header -->
@@ -86,7 +48,7 @@
                           </div>
                         </div>
                         <h3>
-                          <a href="rooms-details.html">Luxury </a>
+                          <a href="rooms-details.html">this is first movie </a>
                         </h3>
                         <h5 class="location">
                           <a href="rooms-details.html">
@@ -96,7 +58,7 @@
                         <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
                           labore et dolore magna aliqua.</p>
                         <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
+                        <a class="btn btn-sm btn-theme next-step">詳細を見る</a>
                       </div>
                     </div>
                     <div class="hotel-box">
@@ -117,7 +79,7 @@
                           </div>
                         </div>
                         <h3>
-                          <a href="rooms-details.html">Single </a>
+                          <a href="rooms-details.html">this is second movie </a>
                         </h3>
                         <h5 class="location">
                           <a href="rooms-details.html">
@@ -127,7 +89,7 @@
                         <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
                           labore et dolore magna aliqua.</p>
                         <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More </a>
+                        <a class="btn btn-sm btn-theme next-step">詳細を見る </a>
                       </div>
                     </div>
                   </div>
@@ -150,7 +112,7 @@
                           </div>
                         </div>
                         <h3>
-                          <a href="rooms-details.html">Double </a>
+                          <a href="rooms-details.html">this is third movie </a>
                         </h3>
                         <h5 class="location">
                           <a href="rooms-details.html">
@@ -160,7 +122,7 @@
                         <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
                           labore et dolore magna aliqua.</p>
                         <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
+                        <a class="btn btn-sm btn-theme next-step">詳細を見る</a>
                       </div>
                     </div>
                     <div class="hotel-box">
@@ -181,7 +143,7 @@
                           </div>
                         </div>
                         <h3>
-                          <a href="rooms-details.html">Single </a>
+                          <a href="rooms-details.html">this is fouth movie </a>
                         </h3>
                         <h5 class="location">
                           <a href="rooms-details.html">
@@ -191,7 +153,7 @@
                         <p>Lorem ipsum dolor sit amet, conser adipisic elit, sed do eiusmod tempor incididunt ut
                           labore et dolore magna aliqua.</p>
                         <br/>
-                        <a class="btn btn-sm btn-theme next-step">View More</a>
+                        <a class="btn btn-sm btn-theme next-step">詳細を見る</a>
                       </div>
                     </div>
                   </div>
