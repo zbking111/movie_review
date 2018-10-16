@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :create_movie, only: [:home, :search]
   def home
     find_movie
+    @movies = Movie.where check:1
   end
 
   def search

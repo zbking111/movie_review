@@ -68,7 +68,7 @@
                   <div class="row">
                     <% if @movies.blank? %>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p class="margin-left-18">「」に一致する結果はありませんでした。</p>
+                        <p class="margin-left-18">「<%= @q.name_cont %>」に一致する結果はありませんでした。</p>
                       </div>
                     <% else %>
                       <%= render @movies %>
