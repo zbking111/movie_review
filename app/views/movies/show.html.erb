@@ -27,8 +27,10 @@
               <li>
                 <i class="fa fa-circle-o" aria-hidden="true"></i>
                 <strong>平均評価:</strong>
-                <div class="star-rating" title="Rated 4.00 out of 5">
-                  <span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
+                <div class="star-rating" title="">
+                  <span id="all-star" style="width:70%" ></span>
+                </div>
+                <span id="all-rate" > 4/5</span>
               </li>
 
               <ul class="starring">
@@ -235,6 +237,7 @@
 
 
         $('#cmntContr').append(str);
+
         const WEB_PATH = "http://gtm2018.herokuapp.com";
         const LOCAL_PATH = "http://0.0.0.0:3000";
         const URL_TEST = LOCAL_PATH;
@@ -434,8 +437,9 @@ button{
                        +" </div>"
                       +"</section>"
                 +"</div>";
-    alert(starString);
-
+    // alert(starString);
+    $('#all-star').css("width", "30%");
+    $('#all-rate').text("rate: "+ 4/5);
   });
 
 
