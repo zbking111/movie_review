@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'reviews/show'
+  get "/add_review", to: "reviews#add"
+  get 'reviews/remove'
   devise_for :users
   root to: 'static_pages#home'
   get 'static_pages/home'
