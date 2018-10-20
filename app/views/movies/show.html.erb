@@ -1,4 +1,6 @@
-
+<% cv = @movie.reviews.count %>
+<% s = @movie.rate_score %>
+<% pe = s*100/5%>
 <main class="main-content">
   <div class="container">
     <div class="page">
@@ -28,9 +30,9 @@
                 <i class="fa fa-circle-o" aria-hidden="true"></i>
                 <strong>平均評価:</strong>
                 <div class="star-rating" title="">
-                  <span id="all-star" style="width:70%" ></span>
+                  <span id="all-star" style="width:<%=pe%>%" ></span>
                 </div>
-                <span id="all-rate" > 4/5</span>
+                <span id="all-rate" > <%=s%>/5</span>
               </li>
 
               <ul class="starring">
@@ -126,6 +128,8 @@
                       <% end %>
                       <input type="hidden" id="user_id" value="<%= current_user.id%>">
                       <input type="hidden" id="movie_id" value="<%= @movie.id %>">
+                      <input type="hidden" id="s" value="<%=s%>">
+                      <input type="hidden" id="cv" value="<%= cv %>">
                     </div>
                     <div class="form_grp">
                       <% if myReview %>
@@ -206,6 +210,8 @@
       var userCmnt = $('#userCmnt').val();
       var userId = $('#user_id').val();
       var movieId = $('#movie_id').val();
+      var s = $('#s').val();
+      var cv = $('#cv').val();
       // update
       if($('#submit').hasClass('editNow')){
         const WEB_PATH = "http://gtm2018.herokuapp.com";
@@ -278,7 +284,15 @@
         $("#my-review").text(userCmnt);
         $('#submit').addClass('editNow');
         $('#nonRV').hide();
-      }
+        cv = parseFloat(cv);
+        if(cv == 0)
+          s = starCount;
+        else
+          s = s*cv/(cv+1)+starCount/(cv+1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
+        }
       // $(this).removeClass('editNow');
   });
 
@@ -470,8 +484,7 @@ button{
                       +"</section>"
                 +"</div>";
     // alert(starString);
-    $('#all-star').css("width", "30%");
-    $('#all-rate').text("rate: "+ 4/5);
+
   });
 
 
