@@ -9,9 +9,9 @@
     <div class="pull-left meta">
       <div class="title h5">
         <a href="#"><b><%= review.user.name %></b></a>
-        made a post.
+        <!-- made a post. -->
       </div>
-      <h6 class="text-muted time"><%= time_ago_in_words(review.updated_at) %></h6>
+      <h6 class="text-muted time"><%= review.updated_at %></h6>
     </div>
     <div class="pull-right meta">
       <section class="rating-widget">
