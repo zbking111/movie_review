@@ -171,7 +171,10 @@
    $(function(){
   var inDexValue;
 
-    $('button').click( function() {
+    $('#my-but').click( function() {
+      $('#my-div').hide();
+    });
+    $('#submit').click( function() {
       if($('#userCmnt').val().length == '' ){
        alert('レビューを入力して下さい');
        return true;
@@ -184,6 +187,14 @@
 
         // $('#cmntContr>div.viewCmnt').eq(inDexValue).children('p').html(userCmnt);
         $("#my-review").text(userCmnt);
+        $("#my-star1").removeClass('selected');
+        for(i=1;i<=5;i++){
+          if(i<=starCount){
+            $("#my-star"+i).addClass('selected');
+          }
+          else
+            $("#my-star"+i).removeClass('selected');
+        }
         // alert('1');
 
       }else{
