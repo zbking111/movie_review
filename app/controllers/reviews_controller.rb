@@ -7,7 +7,11 @@ class ReviewsController < ApplicationController
         movie = Movie.find(@s.movie_id)
         cv = movie.reviews.count # count review
         s = movie.rate_score
-        s = (s*cv-@s.rate)/(cv-1)
+        if cv == 1
+          s = 0
+        else
+          s = (s*cv-@s.rate)/(cv-1)
+        end
         movie.rate_score = s
         movie.save
         @r.destroy
@@ -19,10 +23,17 @@ class ReviewsController < ApplicationController
         movie = Movie.find(@s.movie_id)
         cv = movie.reviews.count # count review
         s = movie.rate_score
-        s = (s*cv-@s.rate)/(cv-1)
+        if cv == 1
+          s = 0
+        else
+          s = (s*cv-@s.rate)/(cv-1)
+        end
         cv = cv -1
 
         newRate = s*cv/(10*(cv+1)*0.1)+params[:review][:rate].to_i/(10*(cv+1)*0.1)
+        puts
+        puts "====="
+        puts "s: #{s}, cv: #{cv}, param: #{params[:review][:rate].to_i}, new: #{newRate}"
         movie.rate_score = newRate
         movie.save
         @s.update_attributes rate_params

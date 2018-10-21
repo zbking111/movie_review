@@ -130,6 +130,9 @@
                       <input type="hidden" id="movie_id" value="<%= @movie.id %>">
                       <input type="hidden" id="s" value="<%=s%>">
                       <input type="hidden" id="cv" value="<%= cv %>">
+                      <% if myReview %>
+                        <input type="hidden" id="star" value="<%= myRate.rate %>">
+                      <% end %>
                     </div>
                     <div class="form_grp">
                       <% if myReview %>
@@ -177,7 +180,7 @@
 
  <script type="text/javascript">
   var starCount = 0;
-  var starString = "";
+  var starString = 0;
    $(function(){
   var inDexValue;
 
@@ -194,6 +197,10 @@
 
 
       var movieId = $('#movie_id').val();
+      var s = $('#s').val();
+      var cv = $('#cv').val();
+      var my_rate = $('#star').val();
+
       const WEB_PATH = "http://gtm2018.herokuapp.com";
         const LOCAL_PATH = "http://0.0.0.0:3000";
         const URL_TEST = LOCAL_PATH;
@@ -201,6 +208,15 @@
         var url = URL_TEST+'/add_review?review[movie_id]='+movieId+'&review[user_id]='+userId+'&review[content]='+userCmnt+'&review[rate]='+100;
         xhttp.open('GET', url, true);
         xhttp.send();
+
+        cv = parseFloat(cv);
+        if(cv == 1)
+          s = 0 ;
+        else
+          s = (s*cv-my_rate)/(cv-1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
     });
     $('#submit').click( function() {
       if($('#userCmnt').val().length == '' ){
@@ -212,6 +228,7 @@
       var movieId = $('#movie_id').val();
       var s = $('#s').val();
       var cv = $('#cv').val();
+      var my_rate = $('#star').val();
       // update
       if($('#submit').hasClass('editNow')){
         const WEB_PATH = "http://gtm2018.herokuapp.com";
@@ -234,6 +251,16 @@
               $("#my-star"+i).removeClass('selected');
           }
         }
+        cv = parseFloat(cv);
+        if(cv == 1)
+          s = 0 ;
+        else
+          s = (s*cv-my_rate)/(cv-1);
+        cv = cv -1
+        s = s*cv/(cv+1)+starCount/(cv+1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
         // alert('1');
 
       }else{
