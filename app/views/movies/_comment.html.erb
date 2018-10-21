@@ -1,4 +1,4 @@
-<% movie.reviews.each do |review| %>
+<% movie.reviews.order(updated_at: :desc).each do |review| %>
 <% rate = Rate.find_by(user_id: review.user_id, movie_id: review.movie_id) %>
 <% id_div = "my-div" if review.user_id == current_user.id %>
 <div class="panel panel-white post panel-shadow" id="<%=id_div%>">

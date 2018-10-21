@@ -152,7 +152,7 @@
                 <center>最新レビュー</center>
             </div>
             <div id="nonRV" >
-            <% if !myReview %>
+            <% if @movie.reviews.blank? %>
               <br>
               <center>まだありません。</center>
             <% end %>
@@ -280,7 +280,7 @@
                     +"<a href=\"#\"><b>Nguyen Dang Hai</b></a>"
                     +"made a post."
                   +"</div>"
-                  +"<h6 class=\"text-muted time\">1 minute ago</h6>"
+                  +"<h6 class=\"text-muted time\">1分前</h6>"
                 +"</div>"
                 + starString
              +" </div>"
@@ -349,7 +349,7 @@
   border:0;
 }
 body{
-  font: 13px/100% tahoma;
+  font: 16px/100% tahoma;
   }
 .clear{clear:both;}
 .wrapper{
