@@ -48,14 +48,6 @@
               <div class="movie-summary">
                 <p><%= @movie.info %></p>
               </div>
-
-              <div style="background-color: #e1e2e3; border-radius: 4px;">
-                <% if !Rate.find_by(user_id: current_user.id, movie_id: @movie.id) %>
-                  <center><span id="kaku">映画レビューを書く</span></center>
-                <% else %>
-                  <center><span id="kaku">レビューを編集する</span></center>
-                <% end %>
-              </div>
               <br>
 
             </ul>
@@ -68,10 +60,15 @@
                 </div>
                 <div class="pull-left meta">
                   <div class="title h5">
-                    <a href="#"><b><%= current_user.name %></b></a>
+                    <a href="#"><b><%= current_user.name %></b></a> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    <% if !Rate.find_by(user_id: current_user.id, movie_id: @movie.id) %>
+                     <span id="kaku">映画レビューを書く</span>
+                    <% else %>
+                     <span id="kaku">レビューを編集する</span>
+                    <% end %>
                     <!-- made a post. -->
-                  </div>
-                  <h6 class="text-muted time">1 minute ago</h6>
+                  </div><!--
+                  <h6 class="text-muted time">1 minute ago</h6> -->
 
                 </div>
                 <div class="pull-right meta">
