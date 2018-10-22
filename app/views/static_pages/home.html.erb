@@ -21,45 +21,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <!-- Search area box 2 start -->
-                <div class="search-area-box-2 search-booking-box bg-grey">
-                  <div class="search-contents">
-                    <div class="search-your-rooms">
-                      <h2 class="hidden-xs hidden-sm">詳細検索</h2>
-                    </div>
-
-                    <div class="search-your-details">
-                      <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
-                        <h5>映画の名前</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "名前を入力" %>
-                        </div>
-
-                        <h5>レート</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "最小" %>
-                        </div>
-
-                        <div class="form-group">
-                          <%= sf.search_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "最大" %>
-                        </div>
-
-                        <h5>公開日はこの日から</h5>
-                        <div class="form-group">
-                          <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
-                        </div>
-
-                        <h5>俳優</h5>
-                        <div class="form-group">
-                          <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優の名前"%>
-                        </div>
-
-                        <div class="form-group">
-                          <%= sf.submit "検索", class: "search-button btn-theme" %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+                <%= render "movies/search_form" %>
                 <!-- Search area box 2 end -->
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12">
@@ -71,7 +33,7 @@
                         <p class="margin-left-18">「<%= @q.name_cont %>」に一致する結果はありませんでした。</p>
                       </div>
                     <% else %>
-                      <%= render @movies %>
+                      <%= render @movies.order(updated_at: :desc) %>
                     <% end %>
                   </div>
                 </div>

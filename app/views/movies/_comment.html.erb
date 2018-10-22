@@ -1,0 +1,67 @@
+<% movie.reviews.order(updated_at: :desc).each do |review| %>
+<% rate = Rate.find_by(user_id: review.user_id, movie_id: review.movie_id) %>
+<% id_div = "my-div" if review.user_id == current_user.id %>
+<div class="panel panel-white post panel-shadow" id="<%=id_div%>">
+  <div class="post-heading">
+    <div class="pull-left image">
+      <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+    </div>
+    <div class="pull-left meta">
+      <div class="title h5">
+        <a href="#"><b><%= review.user.name %></b></a>
+        <!-- made a post. -->
+      </div>
+      <h6 class="text-muted time"><%= review.updated_at %></h6>
+    </div>
+    <div class="pull-right meta">
+      <section class="rating-widget">
+        <!-- Rating Stars Box -->
+        <div class="rating-stars text-center">
+          <ul >
+            <% id_star = "my-star" if review.user_id == current_user.id %>
+            <% for i in 1..5 %>
+              <% if i <= rate.rate %>
+                <li class="star selected" id="<%=id_star%><%=i%>">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+              <% else %>
+                <li class="star" id="<%=id_star%><%=i%>">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+              <% end %>
+            <% end %>
+
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div class="post-description">
+
+    <p>
+      <% if review.user_id == current_user.id %>
+        <span id="my-review">
+          <%= review.content %>
+        </span>
+      <% else %>
+        <span>
+          <%= review.content %>
+        </span>
+      <% end %>
+    </p>
+    <div class="stats">
+      <a  class="btn btn-default stat-item">
+        <i class="fa fa-thumbs-up icon"></i>2
+      </a>
+      <a  class="btn btn-default stat-item">
+        <i class="fa fa-thumbs-down icon"></i>12
+      </a>
+      <% id_but = "my-but" if review.user_id == current_user.id %>
+      <% if review.user_id == current_user.id %>
+      <button type="button" id="<%=id_but%>"> 削除 </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
