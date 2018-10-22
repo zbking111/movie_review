@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admins/index'
+  get 'reviews/show'
   get "/add_review", to: "reviews#add"
   get 'reviews/remove'
   devise_for :users

@@ -1,0 +1,16 @@
+<%= will_paginate %>
+
+<ul class="movies">
+  <% @movies.each do |movie| %>
+    <li>
+      <%= link_to movie.name, movie %>
+      <%= link_to movie.picture, movie %>
+      <%= link_to movie.info, movie %>
+      <%= link_to movie.date, movie %>
+    </li>
+    <%= link_to "delete", movie, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</ul>
+<%= will_paginate %>
+
