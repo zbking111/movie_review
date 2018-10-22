@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admins/index'
   get 'reviews/show'
   devise_for :users
   root to: 'static_pages#home'
