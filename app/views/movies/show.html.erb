@@ -1,3 +1,6 @@
+<% cv = @movie.reviews.count %>
+<% s = @movie.rate_score %>
+<% pe = s*100/5%>
 <main class="main-content">
   <div class="container">
     <div class="page">
@@ -18,7 +21,7 @@
               <i class="fa fa-film" aria-hidden="true"></i>
               <%= @movie.name %></div>
             <ul class="movie-meta">
-
+              <br>
               <li>
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <strong>公開日：</strong> <%= (@movie.date) %>
@@ -26,8 +29,10 @@
               <li>
                 <i class="fa fa-circle-o" aria-hidden="true"></i>
                 <strong>平均評価:</strong>
-                <div class="star-rating" title="Rated 4.00 out of 5">
-                  <span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
+                <div class="star-rating" title="">
+                  <span id="all-star" style="width:<%=pe%>%" ></span>
+                </div>
+                <span id="all-rate" > <%=s%>/5</span>
               </li>
 
               <ul class="starring">
@@ -43,10 +48,6 @@
               <div class="movie-summary">
                 <p><%= @movie.info %></p>
               </div>
-
-              <div style="background-color: #e1e2e3; border-radius: 4px;">
-                <center>映画レビュー</center>
-              </div>
               <br>
 
             </ul>
@@ -59,25 +60,112 @@
                 </div>
                 <div class="pull-left meta">
                   <div class="title h5">
-                    <a href="#"><b>Nguyen Dang Hai</b></a>
-                    made a post.
-                  </div>
-                  <h6 class="text-muted time">1 minute ago</h6>
+                    <a href="#"><b><%= current_user.name %></b></a> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    <% if !Rate.find_by(user_id: current_user.id, movie_id: @movie.id) %>
+                     <span id="kaku">映画レビューを書く</span>
+                    <% else %>
+                     <span id="kaku">レビューを編集する</span>
+                    <% end %>
+                    <!-- made a post. -->
+                  </div><!--
+                  <h6 class="text-muted time">1 minute ago</h6> -->
+
+                </div>
+                <div class="pull-right meta">
+                  <section class='rating-widget'>
+                        <!-- Rating Stars Box -->
+                        <div class='rating-stars text-center'>
+                          <ul id='stars'>
+                            <% myRate = Rate.find_by(user_id: current_user.id, movie_id: @movie.id) %>
+                            <% if !myRate %>
+                              <li class='star' title='Poor' data-value='1' id="new-star1">
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Fair' data-value='2' id="new-star2">
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Good' data-value='3' id="new-star3">
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Excellent' data-value='4' id="new-star4">
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='WOW!!!' data-value='5' id="new-star5">
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                            <% else %>
+                              <% for i in 1..5 %>
+                                <% if i<= myRate.rate %>
+                                  <li class='star selected' data-value='<%=i%>' id="new-star<%=i%>" >
+                                    <i class='fa fa-star fa-fw'></i>
+                                  </li>
+                                <% else %>
+                                  <li class='star' data-value='<%=i%>' >
+                                    <i class='fa fa-star fa-fw'></i>
+                                  </li>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          </ul>
+                        </div>
+                      </section>
+
                 </div>
               </div>
-              <div class="post-description">
-                <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js
-                  framework. Codes for developers and web designers</p>
-                <div class="stats">
-                  <a href="#" class="btn btn-default stat-item">
-                    <i class="fa fa-thumbs-up icon"></i>2
-                  </a>
-                  <a href="#" class="btn btn-default stat-item">
-                    <i class="fa fa-thumbs-down icon"></i>12
-                  </a>
-                </div>
+              <div class="">
+                <!-- write comment  -->
+                <form id="cmnt">
+                  <fieldset>
+                    <div class="form_grp">
+                      <% myReview = Review.find_by(user_id: current_user.id, movie_id: @movie.id) %>
+                      <% if myReview %>
+                        <textarea id="userCmnt" placeholder="映画レビュー" style="border-width: 2px;"><%= myReview.content %></textarea>
+                      <% else %>
+                        <textarea id="userCmnt" placeholder="映画レビュー" style="border-width: 2px;"></textarea>
+                      <% end %>
+                      <input type="hidden" id="user_id" value="<%= current_user.id%>">
+                      <input type="hidden" id="movie_id" value="<%= @movie.id %>">
+                      <input type="hidden" id="s" value="<%=s%>">
+                      <input type="hidden" id="cv" value="<%= cv %>">
+                      <% if myReview %>
+                        <input type="hidden" id="star" value="<%= myRate.rate %>">
+                      <% end %>
+                    </div>
+                    <div class="form_grp">
+                      <% if myReview %>
+                        <button type="button" id="submit" class="editNow" >投稿する</button>
+                      <% else %>
+                        <button type="button" id="submit" >投稿する</button>
+                      <% end %>
+
+                    </div>
+                  </fieldset>
+                </form>
+                <!-- write comment  -->
               </div>
             </div>
+            <!-- end comment -->
+            <div style="background-color: #e1e2e3; border-radius: 4px;">
+                <center>最新レビュー</center>
+            </div>
+            <div id="nonRV" >
+            <% if @movie.reviews.blank? %>
+              <br>
+              <center>まだありません。</center>
+            <% end %>
+            </div>
+            <div class="wrapper">
+              <div class="commentBoxfloat">
+
+              </div>
+
+                <div id="cmntContr">
+                </div>
+            </div>
+            <!-- comment  -->
+            <%= render "movies/comment",movie: @movie %>
+
+            <!-- end comment -->
           </div>
         </div> <!-- .row -->
 
@@ -85,3 +173,354 @@
     </div>
   </div> <!-- .container -->
 </main>
+
+
+ <script type="text/javascript">
+  var starCount = 0;
+  var starString = 0;
+   $(function(){
+  var inDexValue;
+
+    $('#my-but').click( function() {
+      var result = confirm("削除したいですか。");
+      if (!result) {
+          return;
+      }
+      var userId = $('#user_id').val();
+      // alert("kq: "+userId);
+      $('#my-div').hide();
+      $('#kaku').text("映画レビューを書く");
+      $('#userCmnt').val('');
+      starCount = 0;
+      for(i=1;i<=5;i++){
+            $("#new-star"+i).removeClass('selected');
+          }
+
+
+      var movieId = $('#movie_id').val();
+      var s = $('#s').val();
+      var cv = $('#cv').val();
+      var my_rate = $('#star').val();
+
+      const WEB_PATH = "http://gtm2018.herokuapp.com";
+        const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/add_review?review[movie_id]='+movieId+'&review[user_id]='+userId+'&review[content]='+userCmnt+'&review[rate]='+100;
+        xhttp.open('GET', url, true);
+        xhttp.send();
+
+        cv = parseFloat(cv);
+        if(cv == 1)
+          s = 0 ;
+        else
+          s = (s*cv-my_rate)/(cv-1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
+    });
+    $('#submit').click( function() {
+      // if($('#userCmnt').val().length == '' ){
+      //  alert('レビューを入力して下さい');
+      //  return true;
+      // }
+      var userCmnt = $('#userCmnt').val();
+      var userId = $('#user_id').val();
+      var movieId = $('#movie_id').val();
+      var s = $('#s').val();
+      var cv = $('#cv').val();
+      var my_rate = $('#star').val();
+      // update
+      if($('#submit').hasClass('editNow')){
+        const WEB_PATH = "http://gtm2018.herokuapp.com";
+        const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/add_review?review[movie_id]='+movieId+'&review[user_id]='+userId+'&review[content]='+userCmnt+'&review[rate]='+starCount;
+        xhttp.open('GET', url, true);
+        xhttp.send();
+
+        // $('#cmntContr>div.viewCmnt').eq(inDexValue).children('p').html(userCmnt);
+        $("#my-review").text(userCmnt);
+        // $("#my-star1").removeClass('selected');
+        if (starCount > 0) {
+          for(i=1;i<=5;i++){
+            if(i<=starCount){
+              $("#my-star"+i).addClass('selected');
+            }
+            else
+              $("#my-star"+i).removeClass('selected');
+          }
+        }
+        cv = parseFloat(cv);
+        if(cv == 1)
+          s = 0 ;
+        else
+          s = (s*cv-my_rate)/(cv-1);
+        cv = cv -1
+        s = s*cv/(cv+1)+starCount/(cv+1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
+        // alert('1');
+
+      }else{
+        // alert('2');
+        if(starCount == 0){
+         alert('レートを入力して下さい');
+         return true;
+        }
+        $('kaku').text("レビューを編集する");
+        var str = "<div class=\"panel panel-white post panel-shadow\">"+
+              "<div class=\"post-heading\">"
+                +"<div class=\"pull-left image\">"
+                  +"<img src=\"http://bootdey.com/img/Content/user_1.jpg\" class=\"img-circle avatar\" alt=\"user profile image\">"
+                +"</div>"
+                +"<div class=\"pull-left meta\">"
+                  +"<div class=\"title h5\">"
+                    +"<a href=\"#\"><b>Nguyen Dang Hai</b></a>"
+                    +"made a post."
+                  +"</div>"
+                  +"<h6 class=\"text-muted time\">1分前</h6>"
+                +"</div>"
+                + starString
+             +" </div>"
+              +"<div class=\"post-description\">"
+                +"<p> "+userCmnt+" </p>"
+                +"<div class=\"stats\">"
+                  +"<a href=\"#\" class=\"btn btn-default stat-item\">"
+                    +"<i class=\"fa fa-thumbs-up icon\"></i>2"
+                  +"</a>"
+                  +"<a href=\"#\" class=\"btn btn-default stat-item\">"
+                    +"<i class=\"fa fa-thumbs-down icon\"></i>12"
+                  +"</a>"
+                  +"<button type=\"button\" id=\"my-but\"> 削除 </button>"
+                +"</div>"
+              +"</div>"
+            +"</div>";
+
+
+        $('#cmntContr').append(str);
+
+        const WEB_PATH = "http://gtm2018.herokuapp.com";
+        const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/add_review?review[movie_id]='+movieId+'&review[user_id]='+userId+'&review[content]='+userCmnt+'&review[rate]='+starCount;
+        xhttp.open('GET', url, true);
+        xhttp.send();
+        $("#my-review").text(userCmnt);
+        $('#submit').addClass('editNow');
+        $('#nonRV').hide();
+        cv = parseFloat(cv);
+        if(cv == 0)
+          s = starCount;
+        else
+          s = s*cv/(cv+1)+starCount/(cv+1);
+        var pe = s*100/5;
+        $('#all-star').css("width", pe+"%");
+        $('#all-rate').text(s+"/5");
+        }
+      // $(this).removeClass('editNow');
+  });
+
+  // // Delete
+  // $('#cmntContr').on('click', '.delete', function(){
+  //   confirm("Delete Coformation");
+  //   $(this).parent().remove();
+  // });
+  // // Edit
+  // $('#cmntContr').on('click', '.edit', function(){
+
+  //   var toEdit = $(this).prev('p').html();
+  //   //alert(toEdit);
+  //   $('#userCmnt').val(toEdit);
+  //   $('button').addClass('editNow');
+  //   inDexValue = $(this).parent('div.viewCmnt').index();
+
+  // });
+  });
+
+ </script>
+ <style type="text/css">
+   *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  border:0;
+}
+body{
+  font: 16px/100% tahoma;
+  }
+.clear{clear:both;}
+.wrapper{
+  /*width:400px;*/
+  margin:10px auto;
+}
+.commentBox{
+
+}
+fieldset{
+  padding:10px;
+  /*background:#69bdf4;*/
+}
+.form_grp{
+  margin-bottom:10px;
+}
+textarea{
+  width:100%;
+  height:100px;
+  padding:10px;
+  border:1px solid #eee;
+  resize:none;
+}
+button{
+  padding:5px 20px;
+  background-color:#0e7ec7;
+  color:#fff;
+  float:right;
+}
+.viewCmnt{
+  clear:both;
+  overflow:hidden;
+  position:relative;
+  background:#c8e7fb;
+  border-bottom:1px solid #A6DAFC;
+}
+.viewCmnt p {
+  width:100%;
+  float:left;
+  padding:10px;
+  font-size:14px;
+  line-height:20px;
+  }
+.edit, .delete{
+  position:absolute;
+  width:20px;
+  height:20px;
+  display:none;
+  cursor:pointer;
+  bottom:5px;
+  padding:2px;
+   }
+.viewCmnt:hover .edit, .viewCmnt:hover .delete{
+  display:block;
+}
+.edit{
+  right:26px;  background:url(https://cdn4.iconfinder.com/data/icons/miu/22/editor_pencil_pen_edit_write_-16.png) no-repeat center #0e7ec7;
+}
+.delete{
+  right:5px;
+  background:url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-16.png) no-repeat center #0e7ec7;
+  z-index:2;
+}
+ </style>
+
+
+ <style type="text/css">
+
+
+/* Rating Star Widgets Style */
+.rating-stars ul {
+  list-style-type:none;
+  padding:0;
+
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+  display:inline-block;
+
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+  font-size:2em; /* Change the size of the stars */
+  color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+  color:#FFCC36;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
+ </style>
+
+ <script type="text/javascript">
+   $(document).ready(function(){
+
+  /* 1. Visualizing things on Hover - See next part for action on click */
+  $('#stars li').on('mouseover', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+    // Now highlight all the stars that's not after the current hovered star
+    $(this).parent().children('li.star').each(function(e){
+      if (e < onStar) {
+        $(this).addClass('hover');
+      }
+      else {
+        $(this).removeClass('hover');
+      }
+    });
+
+  }).on('mouseout', function(){
+    $(this).parent().children('li.star').each(function(e){
+      $(this).removeClass('hover');
+    });
+  });
+
+
+  /* 2. Action to perform on click */
+  $('#stars li').on('click', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    // alert("selected "+onStar);
+    starCount = onStar;
+    var stars = $(this).parent().children('li.star');
+
+    for (i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('selected');
+    }
+
+    for (i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('selected');
+    }
+
+    starString = "";
+    starString= "<div class=\"pull-right meta\">"
+                  +"<section class=\"rating-widget\">"
+                        +"<div class=\"rating-stars text-center\">"
+                          +"<ul >";
+    for (i=1;i<= 5 ;i++) {
+      if (i<= starCount) {
+                            starString = starString +"<li class=\"star selected\" title=\"Poor\" data-value=\""+i+"\">"
+                              +"<i class=\"fa fa-star fa-fw\"></i>"
+                            +"</li>";
+                            }
+                            else {
+                            starString = starString +"<li class=\"star\" title=\"WOW!!!\" data-value=\""+i+"\">"
+                              +"<i class=\"fa fa-star fa-fw\"></i>"
+                            +"";
+                          }
+                          }
+                          starString = starString + "</ul>"
+                       +" </div>"
+                      +"</section>"
+                +"</div>";
+    // alert(starString);
+
+  });
+
+
+});
+
+
+function responseMessage(msg) {
+  $('.success-box').fadeIn(200);
+  $('.success-box div.text-message').html("<span>" + msg + "</span>");
+}
+ </script>

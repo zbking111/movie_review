@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 p{
     color: #5a5959;
     line-height: 26px;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 ul{
@@ -662,7 +662,7 @@ b, strong {
     position: relative;
     display: block;
     padding: 30px 17px 28px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: 1px;
     background: transparent;
@@ -2459,7 +2459,8 @@ footer ul {
     padding: 20px 25px 25px;
     position: relative;
     display: inline-block;
-    width: 360px;
+    width: auto;
+    height: 245px;
 }
 
 .hotel-box .detail p {
@@ -2487,13 +2488,13 @@ footer ul {
 
 .hotel-box .pr {
     position: absolute;
-    right: 0;
     top: -60px;
     padding: 10px 15px;
     letter-spacing: 1px;
     font-weight: 600;
     color: #fff;
     font-size: 15px;
+    float: right;
 }
 
 .hotel-box .pr .rating{
@@ -2763,8 +2764,18 @@ footer ul {
     margin-bottom: 25px;
 }
 
+.form-content-box .form-group-edit{
+    margin-bottom: 15px;
+}
+
 .form-content-box .details {
     padding: 50px 30px;
+    border-radius: 5px 5px 0 0;
+    background: #fff;
+}
+
+.form-content-box .details-edit {
+    padding: 5px 5px;
     border-radius: 5px 5px 0 0;
     background: #fff;
 }
@@ -5984,4 +5995,9 @@ span.round-tab:hover i {
 
 .margin-left-18{
     margin-left: 18px;
+}
+
+.text-content-movie {
+    width: ;
+    word-wrap: break-word;
 }
