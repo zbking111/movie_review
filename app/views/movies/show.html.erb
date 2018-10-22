@@ -21,7 +21,7 @@
               <i class="fa fa-film" aria-hidden="true"></i>
               <%= @movie.name %></div>
             <ul class="movie-meta">
-
+              <br>
               <li>
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <strong>公開日：</strong> <%= (@movie.date) %>
@@ -182,6 +182,10 @@
   var inDexValue;
 
     $('#my-but').click( function() {
+      var result = confirm("削除したいですか。");
+      if (!result) {
+          return;
+      }
       var userId = $('#user_id').val();
       // alert("kq: "+userId);
       $('#my-div').hide();
@@ -216,10 +220,10 @@
         $('#all-rate').text(s+"/5");
     });
     $('#submit').click( function() {
-      if($('#userCmnt').val().length == '' ){
-       alert('レビューを入力して下さい');
-       return true;
-      }
+      // if($('#userCmnt').val().length == '' ){
+      //  alert('レビューを入力して下さい');
+      //  return true;
+      // }
       var userCmnt = $('#userCmnt').val();
       var userId = $('#user_id').val();
       var movieId = $('#movie_id').val();
