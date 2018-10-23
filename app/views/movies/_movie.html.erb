@@ -3,10 +3,6 @@
     <!--header -->
     <div class="header clearfix">
       <div class="pr">
-        <div class="rating">
-          <div class="star-rating" title="Rated 4.00 out of 5">
-            <span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
-        </div>
       </div>
       <%#= link_to image_tag("phim3.jpg", class: "img-responsive") %>
       <%= image_tag movie.picture_url, class: "img-movie" %>
@@ -27,9 +23,6 @@
           <%= movie.date.year %>年<%= movie.date.month %>月<%= movie.date.day %>日
         </a>
       </h5>
-      <div class="text-content-movie">
-        <%= movie.info %>
-      </div>
 
       <br/>
       <div class="btn btn-sm btn-theme next-step">
