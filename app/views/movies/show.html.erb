@@ -131,6 +131,7 @@
                       <input type="hidden" id="movie_id" value="<%= @movie.id %>">
                       <input type="hidden" id="s" value="<%=s%>">
                       <input type="hidden" id="cv" value="<%= cv %>">
+                      <input type="hidden" id="name" value="<%= current_user.name %>">
                       <% if myReview %>
                         <input type="hidden" id="star" value="<%= myRate.rate %>">
                       <% end %>
@@ -234,6 +235,7 @@
       var s = $('#s').val();
       var cv = $('#cv').val();
       var my_rate = $('#star').val();
+        var name = $('#name').val();
       // update
       if($('#submit').hasClass('editNow')){
         const WEB_PATH = "http://gtm2018.herokuapp.com";
@@ -282,7 +284,7 @@
                 +"</div>"
                 +"<div class=\"pull-left meta\">"
                   +"<div class=\"title h5\">"
-                    +"<a href=\"#\"><b>Nguyen Dang Hai</b></a>"
+                    +"<a href=\"#\"><b>"+name+"</b></a>"
                   +"</div>"
                   +"<h6 class=\"text-muted time\">1分前</h6>"
                 +"</div>"
