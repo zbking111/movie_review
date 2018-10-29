@@ -55,11 +55,19 @@
       <% end %>
     </p>
     <div class="stats">
-      <a  class="btn btn-default stat-item">
-        <i class="fa fa-thumbs-up icon"></i>2
+      <% likeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+      <% unlikeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+
+      <% likeName = "like" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+      <% likeName = "unlike" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+      <% likeName = "none" if review.review_actions.where(user_id: current_user.id).count == 0 %>
+      <a  class="btn btn-default stat-item" onclick="like_review(<%= review.id %>,<%= current_user.id %>)" id="like<%= review.id %>" name="<%= likeName %>" style="<%= likeColor %>">
+        <i class="fa fa-thumbs-up icon"></i>
+        <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
       </a>
-      <a  class="btn btn-default stat-item">
-        <i class="fa fa-thumbs-down icon"></i>12
+      <a  class="btn btn-default stat-item" onclick="unlike_review(<%= review.id %>,<%= current_user.id %>)" id="unlike<%= review.id %>" style="<%= unlikeColor %>">
+        <i class="fa fa-thumbs-down icon"></i>
+        <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
       </a>
       <% id_but = "my-but" if review.user_id == current_user.id %>
       <% if review.user_id == current_user.id %>
@@ -69,3 +77,117 @@
   </div>
 </div>
 <% end %>
+<script type="text/javascript">
+  function like_review(id,user_id){
+    var name1 = $('#like'+id).attr("name");
+    if(name1 == "like")
+    {
+      // delete like function
+      $('#like'+id).css("color", "#333");
+      var sv = parseInt($('#slike'+id).text()) - 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","none");
+
+        const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=0';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+
+      return ;
+    }
+    if(name1 == "none")
+    {
+      $('#like'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#slike'+id).text()) + 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","like");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=1';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "unlike"){
+      $('#unlike'+id).css("color", "#333");
+      var sv = parseInt($('#ulike'+id).text()) - 1;
+      $('#ulike'+id).text(""+sv);
+
+      $('#like'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#slike'+id).text()) + 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","like");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=1';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+
+    // $('#like'+id).attr("name","unlike");
+    // var name1 = $('#like'+id).attr("name");
+    // alert(name1);
+    // alert(sv);
+    // alert("hi "+id);
+    // $('#like'+id).style.color = #42a4f4;
+  }
+  function unlike_review(id, user_id){
+    var name1 = $('#like'+id).attr("name");
+    if(name1 == "unlike")
+    {
+      // delete like function
+      $('#unlike'+id).css("color", "#333");
+      var sv = parseInt($('#ulike'+id).text()) - 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","none");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=0';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "none")
+    {
+      $('#unlike'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#ulike'+id).text()) + 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","unlike");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=2';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "like"){
+      $('#like'+id).css("color", "#333");
+      var sv = parseInt($('#slike'+id).text()) - 1;
+      $('#slike'+id).text(""+sv);
+
+      $('#unlike'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#ulike'+id).text()) + 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","unlike");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=2';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+  }
+</script>

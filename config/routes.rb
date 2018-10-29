@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'admins/index'
   get 'reviews/show'
   get "/add_review", to: "reviews#add"
+  get "/like_review", to: "reviews#like_review"
   get 'reviews/remove'
   devise_for :users, controllers: { registrations: 'registrations' }
   root to: 'static_pages#home'

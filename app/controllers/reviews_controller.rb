@@ -68,6 +68,24 @@ class ReviewsController < ApplicationController
   def remove
   end
 
+  def like_review
+    rid = params[:review][:review_id].to_i
+    uid = params[:review][:user_id].to_i
+    aid = params[:review][:action].to_i
+    rAction = ReviewAction.find_by review_id: rid, user_id: uid
+    if rAction
+      if aid !=0
+        rAction.action = aid
+        rAction.save
+      else
+        rAction.destroy
+      end
+    else
+      action1 = ReviewAction.new(review_id: rid, user_id: uid, action: aid)
+      action1.save
+    end
+  end
+
   private
 
   def review_params
@@ -76,5 +94,8 @@ class ReviewsController < ApplicationController
 
   def rate_params
     params.require(:review).permit :movie_id, :rate, :user_id
+  end
+  def action_params
+    params.require(:review).permit :review_id,:action, :user_id
   end
 end

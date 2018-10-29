@@ -6,5 +6,5 @@ class ReviewAction < ApplicationRecord
   validates :user_id, presence: true
   validates :action, presence: true
 
-  enum action: {unlike: 0, like: 1}
+  # enum action: {unlike: 0, like: 1}
 end
