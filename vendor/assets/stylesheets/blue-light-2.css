@@ -8,6 +8,16 @@ a:hover {
     border: 2px solid #3ac4fa;
 }
 
+.btn-theme-confirm {
+    background: #3ee606;
+    border: 2px solid #34b4e6;
+}
+
+.btn-theme-delete {
+    background: #e60006;
+    border: 2px solid #34b4e6;
+}
+
 .btn-theme:hover {
     background: #34b4e6;
     border: 2px solid #34b4e6;
