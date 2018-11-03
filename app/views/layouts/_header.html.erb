@@ -21,6 +21,11 @@
             <li>
               <%= link_to "マイプロフィール", user_path(current_user.id) %>
             </li>
+            <% if current_user.role == "admin"%>
+              <li>
+                <%= link_to "勧めた映画の管理", admin_suggest_list_path %>
+              </li>
+            <% end %>
           <% end %>
 
         </ul>
@@ -45,6 +50,7 @@
                 <li>
                   <%= link_to "マイプロフィール", user_path(current_user.id) %>
                 </li>
+
                 <li><a data-toggle="modal" data-target="#myModal">映画を勧める</a></li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>

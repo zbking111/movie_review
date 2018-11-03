@@ -1,0 +1,28 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="hotel-box-list" style="padding-top: 20px">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 col-pad">
+      <%= image_tag suggested_movie.picture_url, class: "img-responsive", alt: "rooms-col-1" %>
+    </div>
+    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 detail">
+      <div class="heading">
+        <div class="title pull-left">
+          <h3><%= suggested_movie.name %></h3>
+        </div>
+        <div class="price pull-right">
+          <div class="btn btn-sm btn-theme-confirm next-step">
+            <%= link_to "確認", "#" %>
+          </div>
+          <div class="btn btn-sm btn-theme-delete next-step">
+            <%= link_to "削除", "#" %>
+          </div>
+
+        </div>
+      </div>
+      <h5>
+        <i class="fa fa-calendar"></i>
+        <%= suggested_movie.date.year %>年<%= suggested_movie.date.month %>月<%= suggested_movie.date.day %>日
+      </h5>
+      <p><%= suggested_movie.info %></p>
+    </div>
+  </div>
+</div>

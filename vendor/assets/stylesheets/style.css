@@ -2126,7 +2126,8 @@ footer ul {
 }
 
 .img-responsive {
-    width: 100%;
+    width: 380px;
+    height: 283px;
 }
 
 /** AGENT BOX LIST AREA START **/
