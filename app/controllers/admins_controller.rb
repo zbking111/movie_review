@@ -6,5 +6,9 @@ class AdminsController < ApplicationController
     Movie.find(params[:id]).destroy
     flash[:success] = "Movie deleted"
     redirect_to movies_url
+    update_attributes(deactivated: true) unless deactivated
+  end
+  def user
+  @users = User.paginate(page: params[:page])
   end
 end

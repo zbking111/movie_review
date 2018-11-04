@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'admins/index'
+  get 'admins/user'
   get 'reviews/show'
   get "/add_review", to: "reviews#add"
   get "/like_review", to: "reviews#like_review"

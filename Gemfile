@@ -14,6 +14,7 @@ gem "jquery-rails"
 gem "nested_form"
 gem "carrierwave"
 gem "ransack"
+gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 group :development, :test do
