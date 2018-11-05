@@ -3,7 +3,7 @@ class Movie < ApplicationRecord
   has_many :reviewed_users, through: :reviews, source: :user
   has_many :rates, foreign_key: "movie_id"
   has_many :rated_users, through: :rates, source: :user
-  has_many :movie_characters, foreign_key: "movie_id"
+  has_many :movie_characters, foreign_key: "movie_id", dependent: :destroy
   has_and_belongs_to_many :actors, join_table: 'movie_characters'
   has_many :characters, through: :movie_characters, source: :actor
   accepts_nested_attributes_for :characters
@@ -13,4 +13,6 @@ class Movie < ApplicationRecord
   validates :info, presence: true, length: {maximum: 1000}
   validates :date, presence: true
   mount_uploader :picture, PictureUploader
+
+  scope :order_desc, ->{order created_at: :desc}
 end

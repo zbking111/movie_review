@@ -11,7 +11,6 @@ class MoviesController < ApplicationController
     @movie = Movie.new movie_params
     @movie.check = 0
     @movie.rate_score = 0
-    # byebug
     if @movie.save
       params[:movie][:characters_attributes].each do |a|
         act = Actor.find_by(name: a[1][:name])
@@ -37,7 +36,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @movie.destroy
     flash[:success] = "削除しました"
-    redirect_to admins_index_path
+    redirect_to admin_suggest_list_path
   end
 
   private
