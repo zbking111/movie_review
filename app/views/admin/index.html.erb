@@ -6,7 +6,8 @@
         <th>Picture</th>
         <th>Info</th>
         <th>Date</th>
-        <th>Film delete</th>
+        <th>Movie delete</th>
+        <th>Movie Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +18,10 @@
         <td><%= link_to movie.info, movie %></td>
         <td><%= link_to movie.date, movie %></td>
         <td><button type="button" class="btn btn-danger"><%= link_to "Delete", movie, method: :delete,
-                                  data: { confirm: "You sure?" } %>
+                                  data: { confirm: "Are You sure?" } %>
   <% end %>
   </button></td>
+        <td><button type="button" class="btn btn-success">Edit</button></td>
       </tr>
     </tbody>
   </table>
