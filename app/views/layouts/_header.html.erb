@@ -51,7 +51,16 @@
                   <%= link_to "マイプロフィール", user_path(current_user.id) %>
                 </li>
 
-                <li><a data-toggle="modal" data-target="#myModal">映画を勧める</a></li>
+                <li>
+                  <% if current_user.role == "member" %>
+                    <a data-toggle="modal" data-target="#myModal">映画を勧める</a>
+                  <% else %>
+                    <a data-toggle="modal" data-target="#myModal">映画を追加</a>
+                  <% end %>
+                </li>
+                <li>
+                  <hr>
+                </li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>

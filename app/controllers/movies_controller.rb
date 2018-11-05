@@ -7,9 +7,18 @@ class MoviesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
   def create
     @movie = Movie.new movie_params
-    @movie.check = 0
+    if current_user.role == "member"
+      @movie.check = 0
+    else
+      @movie.check = 1
+    end
     @movie.rate_score = 0
     if @movie.save
       params[:movie][:characters_attributes].each do |a|
@@ -32,11 +41,22 @@ class MoviesController < ApplicationController
     end
   end
 
+  def update
+    @movie = Movie.find(params[:id])
+    @movie.update_attributes movie_params
+    redirect_to @movie
+  end
+
   def destroy
     @movie = Movie.find(params[:id])
+    status1 = @movie.check
     @movie.destroy
     flash[:success] = "削除しました"
-    redirect_to admin_suggest_list_path
+    if status1 == 1
+      redirect_to admin_index_path
+    else
+      redirect_to admin_suggest_list_path
+    end
   end
 
   private

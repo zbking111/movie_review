@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'admin/user'
+  get 'admin/index'
   get '/deactive', to: "admin#deactivate"
   get 'reviews/show'
   get 'admin/suggest_list'
