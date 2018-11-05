@@ -307,3 +307,24 @@ h6 {
 .post .post-footer .comments-list .comment > .comments-list {
   margin-left: 50px;
 }
+.dropdown-menu>li>a{
+  color: #262626 !important;
+  padding: 9px 10px 10px !important;
+}
+.dropdown-menu>li>a>span{
+  margin-right: 10px;
+}
+.dropdown-menu>.view-more>a{
+  color: #23527c !important;
+  font-weight: bold !important;
+  padding: 3px 20px !important;
+}
+.dropdown-menu>.noti-comp>a>span{
+  display: inline-block !important;
+    white-space: normal !important;
+    padding: 2px 0px 10px !important;
+    width: 75%;
+}
+.noti-table{
+  width: 300px;
+}
