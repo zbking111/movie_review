@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :reviews, foreign_key: "user_id"
   has_many :reviewed_movies, through: :reviews, source: :movie
   has_many :rates, foreign_key: "user_id"
+  has_many :notifications, dependent: :destroy
   has_many :rated_movies, through: :rates, source: :movie
   has_many :review_actions, foreign_key: "user_id"
   has_many :maked_action_reviews, through: :review_actions, source: :review
