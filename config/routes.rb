@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'admin/user'
-  get 'admin/index'
-  get 'admin/suggest_list'
+  get '/detective', to: "admin#deactivate"
   get 'reviews/show'
   get "/add_review", to: "reviews#add"
   get "/like_review", to: "reviews#like_review"

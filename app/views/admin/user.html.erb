@@ -14,7 +14,7 @@
         <td><%= link_to user.name, user %></td>
         <td><%= link_to user.email, user%></td>
         <td><%= link_to user.picture, user%></td>
-        <td><button type="button" class="btn btn-danger"><%= link_to "Block", user, method: :deactivated,
+        <td><button type="button" class="btn btn-danger"><%= link_to "Block", deactivate_url,method: :get,
                                   data: { confirm: "Are You sure?" } %>
   <% end %>
   </button></td>
