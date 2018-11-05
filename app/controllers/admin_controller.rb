@@ -5,23 +5,28 @@ class AdminController < ApplicationController
     @movies = Movie.paginate(page: params[:page])
   end
 
-  def destroy
-    Movie.find(params[:id]).destroy
-    flash[:success] = "Movie deleted"
-    redirect_to movies_url
-  end
   def user
-  @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page])
   end
+
   def deactivate
     @user = User.find_by id: params[:id]
-    @user.detective = 1
+    @user.detective= 1
     @user.save
     flash[:success] = "User Blocked"
-    redirect_to users_path 
+    redirect_to admin_user_path
   end
+
   def suggest_list
-    @suggested_movies = Movie.where(check: "0").paginate(page: params[:page])
+    @suggested_movies = Movie.where(check: "0").paginate(page: params[:page]).order_desc
+  end
+
+  def suggest_confirm
+    @suggested_movie = Movie.find_by(id: params[:id])
+    @suggested_movie.check = 1
+    @suggested_movie.save
+    flash[:success] = "確認しました"
+    redirect_to admin_suggest_list_path
   end
 
   private
