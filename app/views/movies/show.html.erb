@@ -52,7 +52,7 @@
 
             </ul>
 
-
+            <% if current_user.detective == 0 %>
             <div class="panel panel-white post panel-shadow">
               <div class="post-heading">
                 <div class="pull-left image">
@@ -149,6 +149,7 @@
                 <!-- write comment  -->
               </div>
             </div>
+            <% end %>
             <!-- end comment -->
             <div style="background-color: #e1e2e3; border-radius: 4px;">
                 <center>最新レビュー</center>
@@ -187,7 +188,7 @@
   var inDexValue;
 
     $('#my-but').click( function() {
-      var result = confirm("削除したいですか。");
+      var result = confirm("このレビューを削除しますか。");
       if (!result) {
           return;
       }
