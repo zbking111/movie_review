@@ -10,10 +10,10 @@
         </div>
         <div class="price pull-right">
           <div class="btn btn-sm btn-theme-confirm next-step">
-            <%= link_to "確認", "#" %>
+            <%= link_to "確認", suggest_confirm_path(id: suggested_movie.id) %>
           </div>
           <div class="btn btn-sm btn-theme-delete next-step">
-            <%= link_to "削除", "#" %>
+            <%= link_to "削除", suggested_movie, method: :delete, data: { confirm: "削除 #{suggested_movie.name} ?" } %>
           </div>
 
         </div>
