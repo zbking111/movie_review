@@ -10,7 +10,9 @@ class AdminController < ApplicationController
     flash[:success] = "Movie deleted"
     redirect_to movies_url
   end
-
+  def user
+  @users = User.paginate(page: params[:page])
+  end
   def suggest_list
     @suggested_movies = Movie.where(check: "0").paginate(page: params[:page])
   end

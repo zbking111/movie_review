@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admin/user'
   get 'admin/index'
   get 'admin/suggest_list'
   get 'reviews/show'
