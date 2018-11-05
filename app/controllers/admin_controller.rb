@@ -13,6 +13,14 @@ class AdminController < ApplicationController
   def user
     @users = User.paginate(page: params[:page])
   end
+  def deactivate
+    @user = User.find_by id: params[:id]
+    # byebug
+    @user.detective= 1
+    @user.save
+    flash[:success] = "User Blocked"
+    redirect_to admin_user_path
+  end
   def suggest_list
     @suggested_movies = Movie.where(check: "0").paginate(page: params[:page])
   end
