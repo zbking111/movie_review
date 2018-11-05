@@ -3,15 +3,27 @@ class MoviesController < ApplicationController
   	@movie = Movie.find(params[:id])
     if @movie && @movie.check == 1
   	 find_movie
+    @ownNotifications= Notification.where("user_id = ? and movie_id = ?",current_user  == "admin")
+    @ownNotifications.each do |noti|
+      noti.destroy
+    end
     else
       redirect_to root_path
     end
   end
+
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
   def create
     @movie = Movie.new movie_params
-    @movie.check = 0
+    if current_user.role == "member"
+      @movie.check = 0
+    else
+      @movie.check = 1
+    end
     @movie.rate_score = 0
-    # byebug
     if @movie.save
       params[:movie][:characters_attributes].each do |a|
         act = Actor.find_by(name: a[1][:name])
@@ -33,11 +45,22 @@ class MoviesController < ApplicationController
     end
   end
 
+  def update
+    @movie = Movie.find(params[:id])
+    @movie.update_attributes movie_params
+    redirect_to admin_index_path
+  end
+
   def destroy
     @movie = Movie.find(params[:id])
+    status1 = @movie.check
     @movie.destroy
     flash[:success] = "削除しました"
-    redirect_to admins_index_path
+    if status1 == 1
+      redirect_to admin_index_path
+    else
+      redirect_to admin_suggest_list_path
+    end
   end
 
   private

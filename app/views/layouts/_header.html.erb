@@ -7,8 +7,21 @@
         </a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
+      <% unchecks = Movie.where(check: nil) %>
 
+      <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
+        <div class="dropdown navbar-component" title="Notification">
+          <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="fa fa-bell"></span>
+          </div>
+          <ul class="dropdown-menu noti-table" aria-labelledby="noti">
+            <% unchecks.each do |uncheck| %>
+              <li class="noti-comp">
+                <%= link_to uncheck.name, movie_path(uncheck) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
         <ul class="nav navbar-nav">
           <li>
             <a id="header-search-btn"></a>
@@ -51,7 +64,16 @@
                   <%= link_to "マイプロフィール", user_path(current_user.id) %>
                 </li>
 
-                <li><a data-toggle="modal" data-target="#myModal">映画を勧める</a></li>
+                <li>
+                  <% if current_user.role == "member" %>
+                    <a data-toggle="modal" data-target="#myModal">映画を勧める</a>
+                  <% else %>
+                    <a data-toggle="modal" data-target="#myModal">映画を追加</a>
+                  <% end %>
+                </li>
+                <li>
+                  <hr>
+                </li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
