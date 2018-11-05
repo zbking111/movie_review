@@ -79,4 +79,15 @@ ActiveRecord::Schema.define(version: 2018_11_05_034308) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "notification"
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_notifications_on_movie_id"
+    t.index ["user_id", "created_at"], name: "index_notifications_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
 end
