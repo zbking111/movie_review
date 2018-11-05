@@ -1,27 +1,24 @@
+<center><h1> 映画一覧 </h1></center>
 <%= will_paginate @movies %>
 <table class="table table-hover">
     <thead>
       <tr class="danger">
-        <th>Name</th>
-        <th>Picture</th>
-        <th>Info</th>
-        <th>Date</th>
-        <th>Movie delete</th>
-        <th>Movie Edit</th>
+        <th>映画名</th>
+        <th>映画情報</th>
+        <th>削除</th>
+        <th>編集</th>
       </tr>
     </thead>
     <tbody>
        <% @movies.each do |movie| %>
       <tr class="success">
         <td><%= link_to movie.name, movie %></td>
-        <td><%= link_to movie.picture, movie%></td>
-        <td><%= link_to movie.info, movie %></td>
-        <td><%= link_to movie.date, movie %></td>
-        <td><button type="button" class="btn btn-danger"><%= link_to "Delete", movie, method: :delete, data: { confirm: "Are You sure?" } %>
+        <td><%= link_to movie.info[0..100], movie %></td>
+        <td><button type="button" class="btn btn-danger"><%= link_to "削除", movie, method: :delete, data: { confirm: "この映画を削除しますか。" } %>
             </button>
         </td>
         <td>
-          <%= link_to "edit", edit_movie_path(movie.id), class: "btn btn-success" %></td>
+          <%= link_to "編集", edit_movie_path(movie.id), class: "btn btn-success" %></td>
         <% end %>
       </tr>
     </tbody>

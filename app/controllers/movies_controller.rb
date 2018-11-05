@@ -44,7 +44,7 @@ class MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
     @movie.update_attributes movie_params
-    redirect_to @movie
+    redirect_to admin_index_path
   end
 
   def destroy
