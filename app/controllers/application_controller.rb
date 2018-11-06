@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_search
+    @movie_new = Movie.new
+    @movie_new.rate_score = 0
     @movie_checkeds = Movie.where(check: 1)
     @q = @movie_checkeds.search(params[:q])
   end

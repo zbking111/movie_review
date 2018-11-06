@@ -2,10 +2,14 @@
   <div class="container">
     <!-- Main title -->
     <div class="main-title">
-      <h1>勧めた映画の一覧</h1>
+      <center><h1>オススメ映画一覧</h1></center>
     </div>
+    <% if @suggested_movies.blank? %>
+      <center> <h4> 新しい映画がありません。</h4></center>
+    <% else %>
     <div class="row">
       <%= render partial: "movies/suggested_movie", collection: @suggested_movies %>
     </div>
-  </div>
+    <% end %>
+    </div>
 </div>

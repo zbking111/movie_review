@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   end
 
   def create_movie
-    @movie = Movie.new
-    @movie.rate_score = 0
+    # @movie = Movie.new
+    # @movie.rate_score = 0
   end
 end

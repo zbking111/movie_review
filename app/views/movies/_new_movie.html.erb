@@ -1,4 +1,4 @@
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 
   <!-- Modal -->
@@ -12,7 +12,7 @@
           <h4 class="modal-title">映画情報</h4>
         </div>
         <div class="modal-body">
-            <%= nested_form_for @movie do |f| %>
+            <%= nested_form_for @movie_new do |f| %>
               <div class="form-group">
                 <label for="exampleInputEmail1">映画名</label>
                 <%= f.text_field :name, class: "form-control",placeholder:"映画名" %>
@@ -56,6 +56,7 @@
   </div>
 
 </div>
+
 <script>
     $(document).ready(function () {
         $('#image1').attr('src');
@@ -71,3 +72,4 @@
         })
     })
 </script>
+

@@ -13,7 +13,7 @@
             <%= link_to "確認", suggest_confirm_path(id: suggested_movie.id) %>
           </div>
           <div class="btn btn-sm btn-theme-delete next-step">
-            <%= link_to "削除", suggested_movie, method: :delete, data: { confirm: "削除 #{suggested_movie.name} ?" } %>
+            <%= link_to "削除", suggested_movie, method: :delete, data: { confirm: "「#{suggested_movie.name}」を削除しますか。" } %>
           </div>
 
         </div>

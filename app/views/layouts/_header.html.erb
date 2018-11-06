@@ -22,9 +22,6 @@
               <%= link_to "マイプロフィール", user_path(current_user.id) %>
             </li>
             <% if current_user.role == "admin"%>
-              <li>
-                <%= link_to "勧めた映画の管理", admin_suggest_list_path %>
-              </li>
             <% end %>
           <% end %>
 
@@ -40,7 +37,15 @@
           <li>
             <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
           </li>
+          <% if current_user.role == "admin" %>
+            <% noti = Movie.where(check: 0).count %>
+            <% if noti != 0 %>
+            <li>
+              <a href="http://localhost:3000/admin/suggest_list" ><i class="fa fa-bell" aria-hidden="true"></i><sup><%= noti %></sup></a>
 
+            </li>
+            <% end %>
+          <% end %>
           <% if user_signed_in? %>
             <li class="dropdown">
               <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
@@ -61,6 +66,9 @@
                 <li>
                   <hr>
                 </li>
+                <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
+                <li><%= link_to "映画一覧", admin_index_path %></li>
+                <li><%= link_to "ユーザー一覧", admin_user_path %></li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
@@ -88,3 +96,4 @@
     </div>
   </div>
 </header>
+<%= render "movies/new_movie" %>
