@@ -49,7 +49,9 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
-    @movie.update_attributes movie_params
+    if !@movie.update_attributes movie_params
+      flash[:danger] = "エラーが発生しました、もう一度お試しください"
+    end
     redirect_to admin_index_path
   end
 

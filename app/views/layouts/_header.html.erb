@@ -37,13 +37,15 @@
           <li>
             <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
           </li>
-          <% if current_user.role == "admin" %>
-            <% noti = Movie.where(check: 0).count %>
-            <% if noti != 0 %>
-            <li>
-              <a href="http://localhost:3000/admin/suggest_list" ><i class="fa fa-bell" aria-hidden="true"></i><sup><%= noti %></sup></a>
+          <% if user_signed_in? %>
+            <% if current_user.role == "admin" %>
+              <% noti = Movie.where(check: 0).count %>
+              <% if noti != 0 %>
+              <li>
+                <a href="http://localhost:3000/admin/suggest_list" ><i class="fa fa-bell" aria-hidden="true"></i><sup><%= noti %></sup></a>
 
-            </li>
+              </li>
+              <% end %>
             <% end %>
           <% end %>
           <% if user_signed_in? %>
