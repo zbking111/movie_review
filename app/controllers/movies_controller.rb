@@ -3,10 +3,6 @@ class MoviesController < ApplicationController
   	@movie = Movie.find(params[:id])
     if @movie && @movie.check == 1
   	 find_movie
-    @ownNotifications= Notification.where("user_id = ? and movie_id = ?",current_user  == "admin")
-    @ownNotifications.each do |noti|
-      noti.destroy
-    end
     else
       redirect_to root_path
     end
@@ -48,7 +44,7 @@ class MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
     @movie.update_attributes movie_params
-    redirect_to admin_index_path
+    redirect_to @movie
   end
 
   def destroy
