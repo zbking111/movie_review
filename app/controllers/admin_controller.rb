@@ -27,10 +27,6 @@ class AdminController < ApplicationController
     @suggested_movies = Movie.where(check: "0").paginate(page: params[:page]).order_desc
   end
 
-  def notification
-
-  end
-
   def suggest_confirm
     @suggested_movie = Movie.find_by(id: params[:id])
     @suggested_movie.check = 1

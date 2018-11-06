@@ -7,21 +7,80 @@
         </a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <% unchecks = Movie.where(check: nil) %>
-
       <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
-        <div class="dropdown navbar-component" title="Notification">
-          <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="fa fa-bell"></span>
-          </div>
-          <ul class="dropdown-menu noti-table" aria-labelledby="noti">
-            <% unchecks.each do |uncheck| %>
-              <li class="noti-comp">
-                <%= link_to uncheck.name, movie_path(uncheck) %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+
+
+          <% if current_user.admin == true %>
+                <div class="dropdown navbar-component" title="Notification">
+                          <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="fa fa-bell"></span>
+                            <% if @notifications.count != 0 %>
+                            <span class="button__badge"><%= @notifications.count %></span>
+                            <% end %>
+
+                          </div>
+                          <ul class="dropdown-menu noti-table" aria-labelledby="noti">
+                            <% @notifications.each do |notification| %>
+                            <li class="noti-comp">
+                            <%= link_to(notification.movie) do %>
+                                <%= image_tag notification.movie.picture.url, class: "img-responsive img-circle noti-pic" if notification.movie.picture? %>
+                                <span>
+                                  <%= notification.notification%>
+                                </span>
+                            <% end %>
+                            </li>
+                            <% end %>
+                          </ul>
+                        </div>
+                        <% end %>
+                <ul class="nav navbar-nav">
+                  <li>
+                    <a id="header-search-btn"></a>
+                  </li>
+                  <li>
+                    <%= link_to "ホーム", root_path %>
+                    <!-- <a href="https://anime-review-danghai.c9users.io" id="header-search-btn">ホーム</a> -->
+                  </li>
+                  <% if user_signed_in? %>
+                    <li>
+                      <%= link_to "マイプロフィール", user_path(current_user.id) %>
+                    </li>
+                    <% if current_user.role == "admin"%>
+                      <li>
+                        <%= link_to "勧めた映画の管理", admin_suggest_list_path %>
+                      </li>
+                    <% end %>
+                  <% end %>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+                  <li>
+                    <%#= search_form_for @q, url: {controller: "static_pages", action: "search"}, html: {method: :post} do |sf| %>
+                    <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
+                      <%= sf.search_field :name_cont, class: "btn-navbar btn btn-sm btn-theme-sm-outline btn-round",
+                                          placeholder: "映画を検索" %>
+                    <% end %>
+                  </li>
+                  <li>
+                    <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
+                  </li>
+
+                  <% if user_signed_in? %>
+                    <li class="dropdown">
+                      <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
+                        <%= current_user.name %><span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <%= link_to "マイプロフィール", user_path(current_user.id) %>
+                        </li>
+
+                        <li>
+                          <% if current_user.role == "member" %>
+                            <a data-toggle="modal" data-target="#myModal">映画を勧める</a>
+                          <% else %>
+                            <a data-toggle="modal" data-target="#myModal">映画を追加</a>
+                          <% end %>
         <ul class="nav navbar-nav">
           <li>
             <a id="header-search-btn"></a>
@@ -35,9 +94,6 @@
               <%= link_to "マイプロフィール", user_path(current_user.id) %>
             </li>
             <% if current_user.role == "admin"%>
-              <li>
-                <%= link_to "勧めた映画の管理", admin_suggest_list_path %>
-              </li>
             <% end %>
           <% end %>
 
@@ -74,6 +130,9 @@
                 <li>
                   <hr>
                 </li>
+                <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
+                <li><%= link_to "映画一覧", admin_index_path %></li>
+                <li><%= link_to "ユーザー一覧", admin_user_path %></li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
