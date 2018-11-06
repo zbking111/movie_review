@@ -1,24 +1,26 @@
 <center><h1> ユーザー一覧 </h1></center>
-<%= will_paginate @users %>
+
+<div class="container">
+  <%= will_paginate @users %>
 <table class="table table-hover">
     <thead>
       <tr class="danger">
-        <th>ユーザーネーム</th>
-        <th>メールアドレス</th>
-        <th>ブロック</th>
+        <th style="padding-left: 70px;">ユーザーネーム</th>
+        <th style="padding-left: 70px;">メールアドレス</th>
+        <th class="text-center">ブロック</th>
       </tr>
     </thead>
     <tbody>
        <% @users.each do |user| %>
        <% if current_user != user %>
        <tr class="success">
-        <td><%= link_to user.name, user %></td>
-        <td><%= link_to user.email, user%></td>
-        <td>
+        <td style="padding-left: 70px;"><%= link_to user.name, user %></td>
+        <td style="padding-left: 70px;"><%= link_to user.email, user%></td>
+        <td class="text-center">
           <% if user.detective == 0 %>
-            <button type="button" class="btn btn-danger"><%= link_to "ブロックする", deactive_path(id: user.id),method: :get, data: { confirm: "このユーザーをブロックしますか" } %>
+            <button type="button" class="btn btn-danger" style="width: 130px;"><%= link_to "ブロックする\t", deactive_path(id: user.id),method: :get, data: { confirm: "このユーザーをブロックしますか" } %>
           <% else %>
-            <button type="button" class="btn btn-primary"><%= link_to "ブロックを解除", undeactivate_path(id: user.id),method: :get, data: { confirm: "このユーザーのブロックを解除しますか。" } %>
+            <button type="button" class="btn btn-primary" style="width: 130px;"><%= link_to "ブロックを解除", undeactivate_path(id: user.id),method: :get, data: { confirm: "このユーザーのブロックを解除しますか。" } %>
             </button>
           <% end %>
         </td>
@@ -28,3 +30,4 @@
     </tbody>
   </table>
 <%= will_paginate @users %>
+</div>
