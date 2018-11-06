@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   before_action :authorize_admin, only: [:index, :suggest_list]
 
   def index
-    @movies = Movie.where(check: 1).paginate(page: params[:page])
+    @movies = Movie.paginate(page: params[:page])
   end
 
   def user
@@ -13,7 +13,7 @@ class AdminController < ApplicationController
     @user = User.find_by id: params[:id]
     @user.detective= 1
     @user.save
-    flash[:success] = "ユーザーをブロックしました。"
+    flash[:success] = "User Blocked"
     redirect_to admin_user_path
   end
   def undeactivate
