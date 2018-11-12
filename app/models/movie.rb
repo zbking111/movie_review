@@ -8,7 +8,7 @@ class Movie < ApplicationRecord
   has_many :characters, through: :movie_characters, source: :actor
   accepts_nested_attributes_for :characters
 
-  validates :name, presence: true, length: {maximum: 50}
+  validates :name, presence: true, length: {maximum: 100}
   validates :picture, presence: true
   validates :info, presence: true, length: {maximum: 1000}
   validates :date, presence: true
