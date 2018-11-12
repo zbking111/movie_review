@@ -14,9 +14,12 @@
               <center>映画情報</center>
             </div>
             <br>
-            <figure class="movie-poster">
-              <%= image_tag (@movie.picture.url) %>
-            </figure>
+            <center>
+              <figure class="movie-poster">
+                <%= image_tag (@movie.picture.url) %>
+              </figure>
+            </center>
+
             <div class="movie-title">
               <i class="fa fa-film" aria-hidden="true"></i>
               <%= @movie.name %></div>

@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :create_movie, only: [:home, :search]
   def home
     find_movie
-    @movies = Movie.where check:1
+    @movies = Movie.where(check:1).paginate(page: params[:page], per_page: 4).order_desc
   end
 
   def search
@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   private
 
   def find_movie
-    @movies = @q.result(distinct: true).includes(:actors)
+    @movies = @q.result(distinct: true).includes(:actors).paginate(page: params[:page], per_page: 4)
   end
 
   def create_movie

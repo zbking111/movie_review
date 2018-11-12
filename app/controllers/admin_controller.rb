@@ -31,7 +31,7 @@ class AdminController < ApplicationController
     @suggested_movie.check = 1
     @suggested_movie.save
     flash[:success] = "確認しました"
-    redirect_to admin_suggest_list_path
+    redirect_to @suggested_movie
   end
 
   private

@@ -1,6 +1,8 @@
 <% movie.reviews.order(updated_at: :desc).each do |review| %>
 <% rate = Rate.find_by(user_id: review.user_id, movie_id: review.movie_id) %>
-<% id_div = "my-div" if review.user_id == current_user.id %>
+<% if user_signed_in? %>
+<% id_div = "my-div" if review.user_id == current_user.id  %>
+<% end %>
 <div class="panel panel-white post panel-shadow" id="<%=id_div%>">
   <div class="post-heading">
     <div class="pull-left image">
@@ -22,7 +24,9 @@
         <!-- Rating Stars Box -->
         <div class="rating-stars text-center">
           <ul >
+            <% if user_signed_in? %>
             <% id_star = "my-star" if review.user_id == current_user.id %>
+            <% end %>
             <% for i in 1..5 %>
               <% if i <= rate.rate %>
                 <li class="star selected" id="<%=id_star%><%=i%>">
@@ -44,10 +48,12 @@
   <div class="post-description">
 
     <p>
-      <% if review.user_id == current_user.id %>
-        <span id="my-review">
-          <%= review.content %>
-        </span>
+      <% if user_signed_in? %>
+        <% if review.user_id == current_user.id %>
+          <span id="my-review">
+            <%= review.content %>
+          </span>
+        <% end %>
       <% else %>
         <span>
           <%= review.content %>
@@ -55,23 +61,34 @@
       <% end %>
     </p>
     <div class="stats">
-      <% likeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
-      <% unlikeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+      <% if user_signed_in? %>
+        <% likeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+        <% unlikeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
 
-      <% likeName = "like" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
-      <% likeName = "unlike" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
-      <% likeName = "none" if review.review_actions.where(user_id: current_user.id).count == 0 %>
-      <a  class="btn btn-default stat-item" onclick="like_review(<%= review.id %>,<%= current_user.id %>)" id="like<%= review.id %>" name="<%= likeName %>" style="<%= likeColor %>">
-        <i class="fa fa-thumbs-up icon"></i>
-        <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
-      </a>
-      <a  class="btn btn-default stat-item" onclick="unlike_review(<%= review.id %>,<%= current_user.id %>)" id="unlike<%= review.id %>" style="<%= unlikeColor %>">
-        <i class="fa fa-thumbs-down icon"></i>
-        <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
-      </a>
-      <% id_but = "my-but" if review.user_id == current_user.id %>
-      <% if review.user_id == current_user.id %>
-      <button type="button" id="<%=id_but%>"> 削除 </button>
+        <% likeName = "like" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+        <% likeName = "unlike" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+        <% likeName = "none" if review.review_actions.where(user_id: current_user.id).count == 0 %>
+        <a  class="btn btn-default stat-item" onclick="like_review(<%= review.id %>,<%= current_user.id %>)" id="like<%= review.id %>" name="<%= likeName %>" style="<%= likeColor %>">
+          <i class="fa fa-thumbs-up icon"></i>
+          <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
+        </a>
+        <a  class="btn btn-default stat-item" onclick="unlike_review(<%= review.id %>,<%= current_user.id %>)" id="unlike<%= review.id %>" style="<%= unlikeColor %>">
+          <i class="fa fa-thumbs-down icon"></i>
+          <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
+        </a>
+        <% id_but = "my-but" if review.user_id == current_user.id %>
+        <% if review.user_id == current_user.id %>
+        <button type="button" id="<%=id_but%>"> 削除 </button>
+        <% end %>
+      <% else %>
+        <a  class="btn btn-default stat-item" >
+            <i class="fa fa-thumbs-up icon"></i>
+            <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
+          </a>
+          <a  class="btn btn-default stat-item" >
+            <i class="fa fa-thumbs-down icon"></i>
+            <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
+          </a>
       <% end %>
     </div>
   </div>

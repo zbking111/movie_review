@@ -33,9 +33,11 @@
                         <p class="margin-left-18">「<%= @q.name_cont %>」に一致する結果はありませんでした。</p>
                       </div>
                     <% else %>
-                      <%= render @movies.order(updated_at: :desc) %>
+                      <%= render @movies %>
+
                     <% end %>
                   </div>
+                  <%= will_paginate @movies %>
                 </div>
               </div>
             </div>

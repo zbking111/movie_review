@@ -12,7 +12,7 @@
     </thead>
     <tbody>
        <% @users.each do |user| %>
-       <% if current_user != user %>
+       <% if user.role != "admin" %>
        <tr class="success">
         <td style="padding-left: 70px;"><%= link_to user.name, user %></td>
         <td style="padding-left: 70px;"><%= link_to user.email, user%></td>

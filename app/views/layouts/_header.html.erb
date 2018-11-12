@@ -24,19 +24,20 @@
             <% if current_user.role == "admin"%>
             <% end %>
           <% end %>
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
           <li>
             <%#= search_form_for @q, url: {controller: "static_pages", action: "search"}, html: {method: :post} do |sf| %>
             <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
               <%= sf.search_field :name_cont, class: "btn-navbar btn btn-sm btn-theme-sm-outline btn-round",
-                                  placeholder: "映画を検索" %>
+                placeholder: "映画を検索", style: "width: 294px;" %>
             <% end %>
           </li>
           <li>
             <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
           </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+
           <% if user_signed_in? %>
             <% if current_user.role == "admin" %>
               <% noti = Movie.where(check: 0).count %>
