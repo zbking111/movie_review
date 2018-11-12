@@ -65,12 +65,12 @@
                     <a data-toggle="modal" data-target="#myModal">映画を追加</a>
                   <% end %>
                 </li>
-                <li>
                   <hr>
-                </li>
-                <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
-                <li><%= link_to "映画一覧", admin_index_path %></li>
-                <li><%= link_to "ユーザー一覧", admin_user_path %></li>
+                <% if current_user.role == "admin" %>
+                  <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
+                  <li><%= link_to "映画一覧", admin_index_path %></li>
+                  <li><%= link_to "ユーザー一覧", admin_user_path %></li>
+                <% end %>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
