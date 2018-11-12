@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_action :authorize_admin, only: [:index, :suggest_list]
+  before_action :authorize_admin, only: [:index, :suggest_list, :user]
 
   def index
     @movies = Movie.where(check: 1).paginate(page: params[:page])
