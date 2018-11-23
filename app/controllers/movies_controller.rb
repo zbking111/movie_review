@@ -1,4 +1,9 @@
 class MoviesController < ApplicationController
+
+  def new
+    @movie = Movie.new
+  end
+
   def show
   	@movie = Movie.find(params[:id])
     if @movie && @movie.check == 1
