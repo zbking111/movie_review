@@ -29,24 +29,28 @@ class MoviesController < ApplicationController
       if !params[:movie][:characters_attributes].blank?
         params[:movie][:characters_attributes].each do |a|
           act = Actor.find_by(name: a[1][:name])
-          if act.blank?
-            r = Actor.new(name: a[1][:name])
-            r.save
-            mc = MovieCharacter.new movie_id: @movie.id, actor_id: r.id
-            mc.save
-          else
-            mc = MovieCharacter.new movie_id: @movie.id, actor_id: act.id
-            mc.save
-          end
+          # if act.blank?
+          #   r = Actor.new(name: a[1][:name])
+          #   r.save
+          #   mc = MovieCharacter.new movie_id: @movie.id, actor_id: r.id
+          #   mc.save
+          # else
+          #   mc = MovieCharacter.new movie_id: @movie.id, actor_id: act.id
+          #   mc.save
+          # end
+          mc = MovieCharacter.new movie_id: @movie.id, actor_id: act.id, role: a[1][:role]
+          mc.save
         end
       end
       if current_user.role == "member"
         flash[:success] = "管理者に映画を進めました"
+        redirect_to root_path
       else
         flash[:success] = "映画を追加しました。"
+        redirect_to @movie
       end
-      redirect_to root_path
     else
+      byebug
       flash[:danger] = "エラーが発生しました、もう一度お試しください"
       redirect_to root_path
     end

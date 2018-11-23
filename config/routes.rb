@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'admin/user'
   get 'admin/index'
-  get "movie/new", to: "movies#new"
   get '/deactive', to: "admin#deactivate"
   get '/undeactivate', to: "admin#undeactivate"
   get 'reviews/show'

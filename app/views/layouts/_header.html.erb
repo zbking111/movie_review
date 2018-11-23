@@ -61,9 +61,9 @@
 
                 <li>
                   <% if current_user.role == "member" %>
-                    <a data-toggle="modal" data-target="#myModal">映画を勧める</a>
+                    <%= link_to "映画を勧める", new_movie_path %>
                   <% else %>
-                    <a data-toggle="modal" data-target="#myModal">映画を追加</a>
+                    <%= link_to "映画を追加", new_movie_path %>
                   <% end %>
                 </li>
                   <hr>

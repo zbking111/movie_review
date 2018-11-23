@@ -14,31 +14,50 @@
         <div class="modal-body">
             <%= nested_form_for @movie_new do |f| %>
               <div class="form-group">
-                <label for="exampleInputEmail1">映画名</label>
-                <%= f.text_field :name, class: "form-control",placeholder:"映画名" %>
+                <label for="exampleInputEmail1">映画名 (*)</label>
+                <%= f.text_field :name, class: "form-control",placeholder:"映画名", :required => true %>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">作品情報</label>
-                <%= f.text_area :info, class: "form-control",placeholder:"作品情報",:size => "20x5" %>
+                <label for="exampleInputPassword1">作品情報 (*)</label>
+                <%= f.text_area :info, class: "form-control",placeholder:"作品情報", :required => true,:size => "20x5" %>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">公開日</label>
-                <%= f.date_field :date, class: "form-control" %>
+                <label for="exampleInputPassword1">公開日 (*)</label>
+                <%= f.date_field :date, class: "form-control", :required => true %>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPassword1">ジャンル (*)</label>
+                <%= f.select :category, Cat.all.map{ |c| [c.name, c.id] },
+                {},
+                {class: "form-control"} %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">製作国 (*)</label>
+                <%= f.select :nation, Nation.all.map{ |c| [c.name, c.id] },
+                {},
+                {class: "form-control"} %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">上映時間 (*)</label>
+                <%= f.number_field :duration, class: "form-control",placeholder:"上映時間", :required => true %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">トレーラー (*)</label>
+                <%= f.text_field :trailer, class: "form-control",placeholder:"トレーラーのURL", :required => true %>
               </div>
               <div class="form-group">
                 <label for="exampleInputFile">写真</label>
                 <%= f.file_field :picture %>
               </div>
-              <div id="clock">
-                <center>
-                  <img src=""alt="" id ='image1' style="height: 300px;width: 500px" >
-                </center>
-              </div>
+
               <br>
               <div class="form-group" id="f1">
-                <label for="exampleInputPassword1">キャスト</label>
+                <label for="exampleInputPassword1">キャスト (*)</label>
                 <%= f.fields_for :characters do |task_form| %>
-                  <%= task_form.text_field :name, class:"form-control",placeholder:"俳優名", onclick: "change_cast()" %>
+                  <%= task_form.text_field :name,placeholder:"俳優名", onclick: "change_cast()" %>
+                  <%= task_form.text_field :role,placeholder:"ロール"%>
+                  <br>
                   <%= task_form.link_to_remove "削除" %>
                 <% end %>
                 <p><%= f.link_to_add "キャストを追加", :characters %></p>
@@ -78,16 +97,18 @@
 
 <div class="FixedHeightContainer" id="user-div">
   <div class="input-group c-search">
-    <input type="text" class="form-control" id="contact-list-search">
+    <input type="text" class="form-control" id="contact-list-search" placeholder=" &#x1F50D;       俳優名" autofocus>
   </div>
   <div class="Content">
     <ul class="list-group" id="contact-list">
-      <% User.all.each do |user| %>
-      <li class="list-group-item">
+      <% Actor.all.each do |user| %>
+      <li class="list-group-item" style="    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;" >
         <table >
           <tr>
             <td width="70">
-              <img src="https://res.cloudinary.com/gtm2018/image/upload/v1533282145/group.jpg" class="img" >
+              <!-- <img src="https://res.cloudinary.com/gtm2018/image/upload/v1533282145/group.jpg" class="img" > -->
+              <%= link_to image_tag("#{user.picture}.jpeg", class: "img") %>
             </td>
             <td width="200">
               <span class="name">
@@ -115,8 +136,45 @@
   function change_cast(){
     var x = document.getElementById('user-div');
     x.style.display = 'inline';
+    var x = document.getElementById('contact-list-search');
+    x.value = "";
   }
 </script>
+<style type="text/css">
+
+
+
+
+        .c-search > .form-control {
+         border-radius: 0px;
+         border-width: 2px;
+
+         /*margin: 3px;*/
+         border-bottom-width: 1px;
+         font-size: 1.3em;
+         padding: 12px 12px;
+         height: 44px;
+         /*outline: none !important;*/
+     }
+     .c-search > .form-control:focus {
+        outline:0px !important;
+        -webkit-appearance:none;
+        box-shadow: none;
+    }
+    .c-search > .input-group-btn .btn {
+     border-radius: 0px;
+     border-width: 0px;
+     border-left-width: 1px;
+     border-bottom-width: 1px;
+     height: 44px;
+ }
+
+
+.name {
+    font-size: 1em;
+    font-weight: 700;
+}
+</style>
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
 
 <script type="text/javascript">
