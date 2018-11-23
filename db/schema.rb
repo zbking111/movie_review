@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_034308) do
+ActiveRecord::Schema.define(version: 2018_11_23_073625) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "picture"
+  end
+
+  create_table "list_films", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.integer "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -23,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_034308) do
     t.integer "actor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -34,6 +44,17 @@ ActiveRecord::Schema.define(version: 2018_11_05_034308) do
     t.datetime "updated_at", null: false
     t.float "rate_score"
     t.date "date"
+    t.string "category"
+    t.string "nation"
+    t.integer "duration"
+    t.string "trailer"
+  end
+
+  create_table "notis", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "content"
+    t.string "picture"
+    t.integer "seen"
   end
 
   create_table "rates", force: :cascade do |t|
@@ -62,21 +83,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_034308) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "role", default: 1
-    t.string "picture"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status"
-    t.integer "detective", default: 0
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'bool' for column 'deactivated'
 
 end
