@@ -1,3 +1,20 @@
+.FixedHeightContainer
+{
+  display: none;
+  float:right;
+  height: 200px;
+  width:250px;
+  background: white;
+  border: 3px;
+  position: fixed;
+  bottom: 20%;
+  right: 40%;
+}
+.img {
+  border-radius: 25px;
+  height: 30px;
+  width: 30px;
+}
 h2 {
   font-size: 1.5em;
   margin: 0.83em 0; }
