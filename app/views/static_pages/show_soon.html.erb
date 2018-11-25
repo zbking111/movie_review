@@ -21,56 +21,62 @@
             <div class="row">
               <div class="col-lg-3 col-md-4 col-sm-12">
                 <!-- Search area box 2 start -->
-                <%= render "movies/search_form" %>
+                <div class="search-area-box-2 search-booking-box bg-grey">
+                  <div class="search-contents">
+                    <div class="search-your-rooms">
+                      <h2 class="hidden-xs hidden-sm">詳細検索</h2>
+                    </div>
+
+                    <div class="search-your-details">
+                      <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
+                        <h5>映画の名前</h5>
+                        <div class="form-group">
+                          <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "名前を入力" %>
+                        </div>
+
+                        <h5>レート</h5>
+                        <div class="form-group">
+                          <%= sf.search_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "最小" %>
+                        </div>
+
+                        <div class="form-group">
+                          <%= sf.search_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "最大" %>
+                        </div>
+
+                        <h5>公開日</h5>
+                        <div class="form-group">
+                          <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
+                        </div>
+
+                        <h5>俳優</h5>
+                        <div class="form-group">
+                          <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優の名前"%>
+                        </div>
+
+                        <div class="form-group">
+                          <%= sf.submit "検索", class: "search-button btn-theme" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
                 <!-- Search area box 2 end -->
               </div>
               <div class="col-lg-9 col-md-8 col-sm-12">
                 <div class="row">
-                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">トップランキング</h3></div>
-                  <div class="row" style="margin-left: 10px">
-                    <% if @top_movies.blank? %>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p class="margin-left-18">まだありません。</p>
-                      </div>
-                    <% else %>
-                      <%= render @top_movies %>
-                    <% end %>
-                  </div>
-                  <div>
-                    <%= link_to "もっと見る>>", top_rating_path, class: "btn-link", style: "float: right"%>
-                  </div>
-                  <hr>
-
-                  <div class="col-lg-12"><h3 class="booking-heading-2 black-color">上映中の映画</h3></div>
-                  <div class="row" style="margin-left: 10px">
-                    <% if @showing_movies.blank? %>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p class="margin-left-18">まだありません。</p>
-                      </div>
-                    <% else %>
-                      <%= render @showing_movies %>
-                    <% end %>
-                  </div>
-                  <div>
-                    <%= link_to "もっと見る>>", showing_path, class: "btn-link", style: "float: right"%>
-                  </div>
-                  <hr>
-
                   <div class="col-lg-12"><h3 class="booking-heading-2 black-color">公開予定の映画</h3></div>
                   <div class="row" style="margin-left: 10px">
                     <% if @show_soon_movies.blank? %>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p class="margin-left-18">まだありません。</p>
+                        <p class="margin-left-18">「<%= @q.name_cont %>」に一致する結果はありませんでした。</p>
                       </div>
                     <% else %>
                       <%= render @show_soon_movies %>
+                      <div style="margin-left: 40px">
+                        <%= will_paginate @show_soon_movies %>
+                      </div>
                     <% end %>
                   </div>
-                  <div>
-                    <%= link_to "もっと見る>>", show_soon_path, class: "btn-link", style: "float: right"%>
-                  </div>
-                  <hr>
-
                 </div>
               </div>
             </div>
@@ -148,7 +154,36 @@
                 <h1>Gallery</h1>
               </div>
               <ul>
-
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img-2.jpg" alt="small-img-2">
+                  </a>
+                </li>
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img-4.jpg" alt="small-img-4">
+                  </a>
+                </li>
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img-5.jpg" alt="small-img-5">
+                  </a>
+                </li>
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img-3.jpg" alt="small-img-3">
+                  </a>
+                </li>
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img-6.jpg" alt="small-img-6">
+                  </a>
+                </li>
+                <li>
+                  <a href="gallery-3column.html">
+                    <img src="img/room/small-img.jpg" alt="small-img">
+                  </a>
+                </li>
 
               </ul>
             </div>
@@ -189,4 +224,4 @@
   </div>
 </div>
 <!-- Copy end right-->
-
+<%= render "movies/new_movie" %>

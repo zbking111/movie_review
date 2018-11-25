@@ -2461,7 +2461,7 @@ footer ul {
     position: relative;
     display: inline-block;
     width: auto;
-    height: 245px;
+    height: 150px;
 }
 
 .hotel-box .detail p {
@@ -5990,7 +5990,7 @@ span.round-tab:hover i {
     }
 }
 .img-movie {
-    height: 257.14px; !important;
+    height: 150px; !important;
     width: 100%;
 }
 

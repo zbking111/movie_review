@@ -22,7 +22,18 @@ end
 
 image_data  = File.open(File.join(Rails.root,'app/assets/images/phim4.jpg'))
 
-50.times do |n|
+30.times do |n|
+  name  = Faker::Superhero.name
+  info = Faker::Lorem.sentence(5)
+  Movie.create!(name:  name,
+                picture: image_data,
+                info: info,
+                check: 1,
+                date: Date.current,
+                rate_score: 4)
+end
+
+20.times do |n|
   name  = Faker::Superhero.name
   info = Faker::Lorem.sentence(5)
   Movie.create!(name:  name,
@@ -53,7 +64,7 @@ end
 
   Rate.create!(user_id: x+1,
                  movie_id: x,
-                 rate: 0)
+                 rate: 4)
 
   MovieCharacter.create!(movie_id: x,
                          actor_id: x)
