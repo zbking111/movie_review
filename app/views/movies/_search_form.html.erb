@@ -1,7 +1,7 @@
 <div class="search-area-box-2 search-booking-box bg-grey">
   <div class="search-contents">
     <div class="search-your-rooms">
-      <h2 class="hidden-xs hidden-sm">詳細検索</h2>
+      <h3 class="hidden-xs hidden-sm">詳細検索</h3>
     </div>
 
     <div class="search-your-details">
@@ -20,7 +20,7 @@
         <%= sf.number_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "～星以下",max: 5,min: 0 %>
       </div>
 
-      <h5>公開日はこの日から</h5>
+      <h5>公開日</h5>
       <div class="form-group">
         <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
       </div>
