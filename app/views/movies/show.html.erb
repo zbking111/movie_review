@@ -7,54 +7,156 @@
       <div class="content">
         <div class="row">
           <div class="col-md-4">
-            <%= render "movies/search_form" %>
           </div>
-          <div class="col-md-8">
+            <br>
+            <div class = "row">
+              <div class="col-md-5">
+                <center>
+                  <figure class="movie-poster">
+                    <%= image_tag (@movie.picture.url) %>
+                  </figure>
+                </center>
+              </div>
+              <div class="col-md-6"> 
+                <div class="movie-title">
+                  <i class="fa fa-film" aria-hidden="true"></i>
+                  <%= @movie.name %>
+                </div>
+                <div class="movie-meta">
+                  <br>
+                  <li>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <strong>公開日：</strong> <%= (@movie.date) %>
+                  </li>
+                  <li>
+                    <i class="fa fa-circle-o" aria-hidden="true"></i>
+                    <strong>平均評価:</strong>
+                    <div class="star-rating" title="">
+                    <span id="all-star" style="width:<%=pe%>%" ></span>
+                    </div>
+                    <span id="all-rate" > <%=s%>/5</span>
+                  </li>
+                  <li>
+                    <i class="glyphicon glyphicon-time" aria-hidden="true"></i>
+                    <strong>期間：</strong> <%= (@movie.duration) %>
+                  </li>
+                  <li>
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <strong>国：</strong> <%= (@movie.nation) %>
+                  </li>
+                  <li>
+                    <i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i>
+                    <strong>種類：</strong> <%= (@movie.category) %>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ul class="starring">
+              <li><div style="background-color: #e1e2e3; border-radius: 4px;">
+               <h3><strong>キャスト:</strong></h3>
+            </div>
+              <div class="row">
+                <div class="col-xs-10 col-md-12 col-xs-offset-1 col-md-offset-0">
+                  <div class="row">
+                    <nav aria-label="...">
+                      <ul class="pager" role="tablist">
+                        <li class="previous"><a href="#"><span aria-hidden="true">&laquo;</span> 以前</a></li>
+                        <li class="next"><a href="#">次 <span aria-hidden="true">&raquo;</span></a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                <!-- Tab panes -->
+                  <div class="tab-content" >
+                      <div class="tab-pane active " id="tab1" role="tabpanel">
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 1</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 2</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 3</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 4</h5>
+                              </div>
+                          </div> 
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 5</h5>
+                              </div>
+                          </div> 
+                          <div class="col-sm-2">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 6</h5>
+                              </div>
+                          </div> 
+                      </div>
+                      <div class="tab-pane" id="tab2" role="tabpanel">
+                          <div class="col-sm-3">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 5</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-3">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 6</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-3">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 7</h5>
+                              </div>
+                          </div>
+                          <div class="col-sm-3">
+                              <div class="thumbnail">
+                                <img alt="..." src="http://placehold.it/200x200">
+                                <h5>Thumbnail label 8</h5>
+                              </div>
+                          </div> 
+                      </div>
+                  </div>
+                </div>
+              </div>
+              </li>
+              </ul>
+            </div>  
             <div style="background-color: #e1e2e3; border-radius: 4px;">
-              <center>映画情報</center>
+              <h3><center><strong>解説</strong></center></h3>
+            </div>
+            <div class="movie-summary">
+              <p><%= @movie.info %></p>
             </div>
             <br>
-            <center>
-              <figure class="movie-poster">
-                <%= image_tag (@movie.picture.url) %>
-              </figure>
-            </center>
-
-            <div class="movie-title">
-              <i class="fa fa-film" aria-hidden="true"></i>
-              <%= @movie.name %></div>
-            <ul class="movie-meta">
-              <br>
-              <li>
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <strong>公開日：</strong> <%= (@movie.date) %>
-              </li>
-              <li>
-                <i class="fa fa-circle-o" aria-hidden="true"></i>
-                <strong>平均評価:</strong>
-                <div class="star-rating" title="">
-                  <span id="all-star" style="width:<%=pe%>%" ></span>
-                </div>
-                <span id="all-rate" > <%=s%>/5</span>
-              </li>
-
-              <ul class="starring">
-                <li><strong>キャスト:</strong>
-                  <% @movie.actors.each do |actor| %>
-                    <br><span>・ <%= actor.name %></span>
-                  <% end %>
-                </li>
-              </ul>
-              <div style="background-color: #e1e2e3; border-radius: 4px;">
-                <center>解説</center>
-              </div>
-              <div class="movie-summary">
-                <p><%= @movie.info %></p>
-              </div>
-              <br>
-
-            </ul>
-
+            <div style="background-color: #e1e2e3; border-radius: 4px;">
+              <h3><center><strong>トレーラー</strong></center></h3>
+            </div>
+            <br>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="membed-responsive-item" src="https://www.youtube.com/embed/watch?v=R4212XlLX_g" allowfullscreen></iframe>
+            </div>
+            <br>
+            <div style="background-color: #e1e2e3; border-radius: 4px;">
+              <h3><strong>コメント</strong></h3>
+            </div>
+            <br>
             <% if current_user && current_user.detective == 0 %>
             <div class="panel panel-white post panel-shadow">
               <div class="post-heading">
@@ -116,7 +218,6 @@
                           </ul>
                         </div>
                       </section>
-
                 </div>
               </div>
               <div class="">
@@ -155,7 +256,7 @@
             <% end %>
             <!-- end comment -->
             <div style="background-color: #e1e2e3; border-radius: 4px;">
-                <center>最新レビュー</center>
+              <h3><center><strong>最新レビュー</strong></center></h3>
             </div>
             <div id="nonRV" >
             <% if @movie.reviews.blank? %>
@@ -336,8 +437,10 @@
   //   inDexValue = $(this).parent('div.viewCmnt').index();
   // });
   });
+
  </script>
  <style type="text/css">
+
    *{
   margin:0;
   padding:0;
