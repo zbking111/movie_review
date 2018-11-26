@@ -14,7 +14,7 @@ class Movie < ApplicationRecord
   validates :date, presence: true
   mount_uploader :picture, PictureUploader
 
-  scope :order_desc, ->{order created_at: :desc}
+  scope :order_desc, ->{order updated_at: :desc}
   scope :rate_score_desc, ->{order rate_score: :desc}
   scope :date_7_days_ago, -> {where date: 7.days.ago..Time.current}
   scope :date_30_days_later, -> {where date: 1.day.from_now..30.days.from_now}

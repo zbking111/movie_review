@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/top_rating', to: 'static_pages#top_rating', as: :top_rating
   get '/showing', to: 'static_pages#showing', as: :showing
   get '/show_soon', to: 'static_pages#show_soon', as: :show_soon
+  get '/last_update', to: 'static_pages#last_update', as: :last_update
   resources :movies
   resources :users, only: [:show, :edit]
 end
