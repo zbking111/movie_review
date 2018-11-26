@@ -5998,7 +5998,6 @@ span.round-tab:hover i {
     margin-left: 18px;
 }
 
-.text-content-movie {
-    width: ;
-    word-wrap: break-word;
+.checked {
+    color: orange;
 }
