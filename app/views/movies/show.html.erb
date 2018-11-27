@@ -52,11 +52,11 @@
                 </li>
                 <li>
                   <i class="fa fa-globe" aria-hidden="true"></i>
-                  <strong>製作国：</strong> <%= (@movie.nation) %>
+                  <strong>製作国：</strong> <%= Nation.find(@movie.nation).name %>
                 </li>
                 <li>
                   <i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i>
-                  <strong>ジャンル：</strong> <%= (@movie.category) %>
+                  <strong>ジャンル：</strong> <%= Cat.find(@movie.category).name %>
                 </li>
               </div>
               </div>
