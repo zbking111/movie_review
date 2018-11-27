@@ -22,7 +22,7 @@
         <i class="fa fa-calendar"></i>
         <%= suggested_movie.date.year %>年<%= suggested_movie.date.month %>月<%= suggested_movie.date.day %>日
       </h5>
-      <p><%= suggested_movie.info %></p>
+      <p><%= suggested_movie.info[0..200] %></p>
     </div>
   </div>
 </div>
