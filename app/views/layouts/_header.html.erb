@@ -86,11 +86,36 @@
           <% if user_signed_in? %>
             <% if current_user.role == "admin" %>
               <% noti = Movie.where(check: 0).count %>
+              <% movies = Movie.where(check: 0).order(created_at: :desc).first(3) %>
               <% if noti != 0 %>
-              <li>
-                <a href="http://localhost:3000/admin/suggest_list" ><i class="fa fa-bell" aria-hidden="true"></i><sup><%= noti %></sup></a>
+              <li class="nav-item dropdown">
+                    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-bell"><sup><%= noti %></sup></i>
+                    </a>
+                      <ul class="dropdown-menu">
+                        <li class="head text-light bg-dark">
+                          <div class="row">
+                        </li>
+                        <% movies.each do |movie| %>
+                        <li class="notification-box">
+                          <div class="row">
 
-              </li>
+                              <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                <%= link_to image_tag(movie.picture.url, class: "w-50 pic-rz rounded-circle", size: "45x45"), movie_path(movie) %>
+                              </div>
+
+                              <div class="col-lg-3 col-sm-3 col-3">
+                                <p><%= link_to movie.name, movie_path(movie) %></p>
+                              </div>
+
+                          </div>
+                        </li>
+                        <% end %>
+                        <li class="footer bg-dark text-center">
+                          <a href="http://localhost:3000/admin/suggest_list" class="text-light">View All</a>
+                        </li>
+                      </ul>
+                  </li>
               <% end %>
             <% end %>
           <% end %>
