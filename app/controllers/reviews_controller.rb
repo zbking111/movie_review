@@ -73,16 +73,57 @@ class ReviewsController < ApplicationController
     uid = params[:review][:user_id].to_i
     aid = params[:review][:action].to_i
     rAction = ReviewAction.find_by review_id: rid, user_id: uid
-    if rAction
-      if aid !=0
+    if rAction #neu da co thi update hoac xoa
+      if aid !=0 # update
         rAction.action = aid
         rAction.save
-      else
+
+        # update noti
+        review1 = Review.find rid
+        new_uid = review1.user.id
+        user1 = User.find uid
+        n =Noti.find_by(user_id: new_uid, sub_id: review1.movie.id)
+        if aid == 1
+          content1 = "#{user1.name}さんがあなたのレビューに「いいね」しました。"
+          pic = "like"
+        else
+          content1 = "#{user1.name}さんがあなたのレビューに「よくないね」しました。"
+          pic = "unlike"
+        end
+        n.content = content1
+        n.picture = pic
+        n.save
+        # update xong
+
+      else # xoa like
         rAction.destroy
+        # xoa noti
+        review1 = Review.find rid
+        new_uid = review1.user.id
+        user1 = User.find uid
+        n =Noti.find_by(user_id: new_uid, sub_id: review1.movie.id)
+        n.destroy
+        # xoa xong
       end
-    else
+    else # tao like
       action1 = ReviewAction.new(review_id: rid, user_id: uid, action: aid)
       action1.save
+      # tao noti
+      review1 = Review.find rid
+      new_uid = review1.user.id
+      user1 = User.find uid
+      if aid == 1
+        content1 = "#{user1.name}さんがあなたのレビューに「いいね」しました。"
+        pic = "like"
+      else
+        content1 = "#{user1.name}さんがあなたのレビューに「よくないね」しました。"
+        pic = "unlike"
+      end
+      xem = 0
+      sub_id_1 = review1.movie.id
+      noti = Noti.new(user_id: new_uid, content: content1, picture: pic, seen: xem, sub_id:  sub_id_1)
+      noti.save
+      # tao xong noti
     end
   end
 

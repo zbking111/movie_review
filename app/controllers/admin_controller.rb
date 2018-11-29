@@ -13,6 +13,14 @@ class AdminController < ApplicationController
     @user = User.find_by id: params[:id]
     @user.detective= 1
     @user.save
+    # tao noti
+    new_uid = @user.id
+    content1 = "あなたはブロックされました。"
+    pic = "block"
+    xem = 0
+    noti = Noti.new(user_id: new_uid, content: content1, picture: pic, seen: xem, sub_id: 0)
+    noti.save
+    # tao xong noti
     flash[:success] = "ユーザーをブロックしました。"
     redirect_to admin_user_path
   end
@@ -20,8 +28,15 @@ class AdminController < ApplicationController
     @user = User.find_by id: params[:id]
     @user.detective= 0
     @user.save
+    # tao noti
+    new_uid = @user.id
+    noti = Noti.find_by(user_id: new_uid, sub_id: 0)
+    noti.destroy
+    # tao xong noti
     redirect_to admin_user_path
   end
+
+
   def suggest_list
     @suggested_movies = Movie.where(check: "0").paginate(page: params[:page]).order_desc
   end
