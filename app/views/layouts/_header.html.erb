@@ -84,28 +84,35 @@
         <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
 
           <% if user_signed_in? %>
-            <% if current_user.role == "admin" %>
-              <% noti = Movie.where(check: 0).count %>
-              <% movies = Movie.where(check: 0).order(created_at: :desc).first(3) %>
-              <% if noti != 0 %>
+              <% noti = Noti.where(user_id: current_user.id) %>
+              <% if !noti.blank? %>
               <li class="nav-item dropdown">
                     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-bell"><sup><%= noti %></sup></i>
+                      <i class="fa fa-bell"><sup><%= noti.count %></sup></i>
                     </a>
                       <ul class="dropdown-menu" style="width: 400px;">
                         <li class="head text-light bg-dark">
                           <div class="row">
                         </li>
-                        <% movies.each do |movie| %>
+                        <% noti.each do |movie| %>
                         <li class="notification-box">
                           <div class="row">
 
                               <div class="col-lg-2 col-sm-2 col-2 text-center">
-                                <%= link_to image_tag(movie.picture.url, class: "w-50 pic-rz rounded-circle", size: "65x65"), movie_path(movie) %>
+                                <% if movie.sub_id !=0 %>
+                                  <% mo = Movie.find movie.sub_id %>
+                                  <%= image_tag(mo.picture.url, class: "w-50 pic-rz rounded-circle", size: "65x65") %>
+                                <% else %>
+                                  <%= image_tag(movie.picture, class: "w-50 pic-rz rounded-circle", size: "40x40") %>
+                                <% end %>
                               </div>
 
                               <div class="col-lg-9 col-sm-9 col-9">
-                                <p><%= link_to ("「#{movie.name}」が勧められました"), movie_path(movie) %></p>
+                                <p><% if movie.sub_id !=0 %>
+                                <%= link_to movie.content, movie_path(movie.sub_id) %>
+                                <% else %>
+                                  <%= movie.content %>
+                                <% end %></p>
                                 &ensp;&ensp;<%= movie.created_at %>
                               </div>
 
@@ -118,7 +125,6 @@
                       </ul>
                   </li>
               <% end %>
-            <% end %>
           <% end %>
           <% if user_signed_in? %>
             <li class="dropdown">

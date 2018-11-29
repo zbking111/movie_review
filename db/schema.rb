@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_133244) do
+ActiveRecord::Schema.define(version: 2018_11_29_143144) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2018_11_29_133244) do
     t.string "picture"
     t.integer "seen"
     t.integer "sub_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rates", force: :cascade do |t|

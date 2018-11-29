@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'admin/user'
   get 'admin/index'
   get '/deactive', to: "admin#deactivate"
+  get '/suki', to: "movies#suki"
+  get '/mitai', to: "movies#mitai"
+  get '/mita', to: "movies#mita"
   get '/undeactivate', to: "admin#undeactivate"
   get 'reviews/show'
 

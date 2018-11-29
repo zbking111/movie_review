@@ -4,6 +4,54 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
+  def suki
+    suki = List.find_by(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+    if suki
+      suki.destroy
+      flash[:success]= "「好きな映画」から削除しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    else
+      suki = List.new(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+      suki.save
+      flash[:success]= "「好きな映画」に追加しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    end
+  end
+
+  def mitai
+    suki = List.find_by(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+    if suki
+      suki.destroy
+      flash[:success]= "「見たい映画」から削除しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    else
+      suki = List.new(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+      suki.save
+      flash[:success]= "「見たい映画」に追加しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    end
+  end
+
+  def mita
+    suki = List.find_by(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+    if suki
+      suki.destroy
+      flash[:success]= "「見た映画」から削除しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    else
+      suki = List.new(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
+      suki.save
+      flash[:success]= "「見た映画」に追加しました。"
+      movie = Movie.find params[:id]
+      redirect_to movie
+    end
+  end
+
   def show
   	@movie = Movie.find(params[:id])
     if @movie && @movie.check == 1

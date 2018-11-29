@@ -58,6 +58,49 @@
                   <i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i>
                   <strong>ジャンル：</strong> <%= Cat.find(@movie.category).name %>
                 </li>
+                <li>
+                  <div class="dropdown">
+                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                      <i class="fa fa fa-plus"></i>
+                      リストに追加
+                    </a>
+
+                    <ul class="dropdown-menu">
+                      <li><%= link_to suki_path(id: @movie.id, list_id: 1),method: :get do %>
+                        <% suki = List.find_by(user_id: current_user.id, list_id: 1, movie_id: @movie.id) %>
+                        <% if suki.blank? %>
+                          <i class="fa fa-square-o" aria-hidden="true"></i>
+                        <% else %>
+                          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        <% end %>
+                        好きな映画
+                        <% end %>
+                      </li>
+                      <li>
+                        <%= link_to mitai_path(id: @movie.id, list_id: 2),method: :get do %>
+                        <% suki = List.find_by(user_id: current_user.id, list_id: 2, movie_id: @movie.id) %>
+                        <% if suki.blank? %>
+                          <i class="fa fa-square-o" aria-hidden="true"></i>
+                        <% else %>
+                          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        <% end %>
+                        見たい映画
+                        <% end %>
+                      </li>
+                      <li>
+                        <%= link_to mita_path(id: @movie.id, list_id: 3),method: :get do %>
+                        <% suki = List.find_by(user_id: current_user.id, list_id: 3, movie_id: @movie.id) %>
+                        <% if suki.blank? %>
+                          <i class="fa fa-square-o" aria-hidden="true"></i>
+                        <% else %>
+                          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        <% end %>
+                        見た映画
+                        <% end %>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
               </div>
               </div>
             </div>
@@ -137,10 +180,10 @@
                 <iframe class="membed-responsive-item" src="<%= @movie.trailer %>" allowfullscreen></iframe>
               </div>
         <div style="background-color: #e1e2e3; border-radius: 4px;">
-          <center><h4><strong>コメント</strong></h4></center>
+          <center><h4><strong>レビュー</strong></h4></center>
         </div>
         <br>
-        <% if current_user && current_user.detective == 0 %>
+        <% if current_user && current_user.detective == 0 && Date.today >= @movie.date%>
         <div class="panel panel-white post panel-shadow">
           <div class="post-heading">
             <div class="pull-left image">
