@@ -4,11 +4,18 @@ class AdminController < ApplicationController
   def index
     @movies = Movie.where(check: 1).paginate(page: params[:page])
   end
-
+  def review
+    @reviews = Review.paginate(page: params[:page])
+  end
   def user
     @users = User.paginate(page: params[:page])
   end
-
+  def commentdelete
+    @review = Review.find_by id: params[:id]
+    @review.destroy
+    flash[:success] = "Account Deleted"
+    redirect_to admin_review_path
+  end
   def deactivate
     @user = User.find_by id: params[:id]
     @user.detective= 1
