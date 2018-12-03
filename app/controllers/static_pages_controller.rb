@@ -9,6 +9,15 @@ class StaticPagesController < ApplicationController
     @last_update_movies = Movie.where(check: 1).order_desc.limit(4)
   end
 
+  def delete_noti
+    notis = Noti.where user_id: current_user.id
+    notis.each do |noti|
+      noti.seen = 1
+      noti.save
+    end
+    redirect_to root_path
+  end
+
   def search
   end
 

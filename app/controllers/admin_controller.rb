@@ -12,8 +12,33 @@ class AdminController < ApplicationController
   end
   def commentdelete
     @review = Review.find_by id: params[:id]
+    # tao noti
+    new_uid = @review.user_id
+    content1 = "あなたのレビューが削除されました：「#{@review.content}」"
+    pic = "delete"
+
+    xem = 0
+    sub_id_1 = @review.movie_id
+    noti = Noti.new(user_id: new_uid, content: content1, picture: pic, seen: xem, sub_id:  sub_id_1)
+    noti.save
+    # tao xong noti
     @review.destroy
-    flash[:success] = "Account Deleted"
+    @rate = Rate.find_by movie_id: @review.movie_id, user_id: @review.user_id
+    @rate.destroy
+
+    flash[:success] = "レビューが削除されました。"
+    # cap nhap rate
+    @movie = Movie.find sub_id_1
+    if @movie.rates.count !=0
+      sum = 0
+      @movie.rates.each do |rate|
+        sum = sum + rate.rate
+      end
+      @movie.rate_score = 0.1*(sum/@movie.rates.count)*10
+    else
+      @movie.rate_score = 0
+    end
+    @movie.save
     redirect_to admin_review_path
   end
   def deactivate

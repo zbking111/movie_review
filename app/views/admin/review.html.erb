@@ -8,7 +8,7 @@
         <th style="padding-left: 70px;">ユーザーネーム</th>
         <th style="padding-left: 70px;">映画名</th>
         <th style="padding-left: 70px;">コメント内容</th>
-        <th style="padding-left: 30px;">レート</th>
+        <th align="center">レート</th>
         <th class="text-center">削除</th>
       </tr>
     </thead>
@@ -19,8 +19,12 @@
         <td style="padding-left: 70px;"><%= link_to review.user.name, review.user %></td>
         <td style="padding-left: 70px;"><%= link_to review.movie.name, review.movie %></td>
         <td style="padding-left: 70px;"><%= review.content %></td>
-        <td style="padding-left: 70px;"><%= @rate.rate %></td>
-        <td class="text-center"><button type="button" class="btn btn-danger" style="width: 130px;"><%= link_to "削除", commentdelete_path((id: review.id), method: :delete, data: { confirm: "このコメントを削除しますか。" } %>
+        <td >
+          <div class="star-rating" title="">
+            <span id="all-star" style="width:<%= 100*(@rate.rate)/5 %>%" ></span>
+          </div>
+        </td>
+        <td class="text-center"><button type="button" class="btn btn-danger" style="width: 130px;"><%= link_to "削除", commentdelete_path(id: review.id), method: :delete, data: { confirm: "このコメントを削除しますか。" } %>
             </button>
         </td>
       </tr>

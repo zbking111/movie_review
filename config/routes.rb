@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'admin/user' 
-  get 'admin/review' ,to: "admin#commentdelete"
+  get 'delete_noti', to: "static_pages#delete_noti"
+  get 'admin/user'
+  get 'admin/review' ,to: "admin#review"
+  delete 'commentdelete', to:"admin#commentdelete"
   get 'admin/index'
   get '/deactive', to: "admin#deactivate"
   get '/suki', to: "movies#suki"

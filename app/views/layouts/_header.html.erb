@@ -84,12 +84,19 @@
         <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
 
           <% if user_signed_in? %>
-              <% noti = Noti.where(user_id: current_user.id) %>
-              <% if !noti.blank? %>
+              <% noti = Noti.where(user_id: current_user.id, seen: 0) %>
+
               <li class="nav-item dropdown">
                     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-bell"><sup><%= noti.count %></sup></i>
+                      <% if !noti.blank? %>
+                      <i class="fa fa-bell">
+
+                        <sup style="font-size: 17px;"><%= noti.count %></sup>
+
+                      </i>
+                      <% end %>
                     </a>
+                    <% if !noti.blank? %>
                       <ul class="dropdown-menu" style="width: 400px;">
                         <li class="head text-light bg-dark">
                           <div class="row">
@@ -103,7 +110,7 @@
                                   <% mo = Movie.find movie.sub_id %>
                                   <%= image_tag(mo.picture.url, class: "w-50 pic-rz rounded-circle", size: "65x65") %>
                                 <% else %>
-                                  <%= image_tag(movie.picture, class: "w-50 pic-rz rounded-circle", size: "40x40") %>
+                                  <%= image_tag(movie.picture, class: "w-50 pic-rz rounded-circle", size: "65x65") %>
                                 <% end %>
                               </div>
 
@@ -120,7 +127,7 @@
                         </li>
                         <% end %>
                         <li class="footer bg-dark text-center">
-                          <a href="http://localhost:3000/admin/suggest_list" class="text-light">すべて見る</a>
+                          <%= link_to "すべて既読にする", delete_noti_path, class:"text-light" %>
                         </li>
                       </ul>
                   </li>
@@ -145,6 +152,7 @@
                 </li>
                   <hr>
                 <% if current_user.role == "admin" %>
+                  <li><%= link_to "レビュー一覧", admin_review_path %></li>
                   <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
                   <li><%= link_to "映画一覧", admin_index_path %></li>
                   <li><%= link_to "ユーザー一覧", admin_user_path %></li>
