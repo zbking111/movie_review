@@ -6,33 +6,43 @@
 
     <div class="search-your-details">
       <%= search_form_for @q, url: search_path, html: {method: :post} do |sf| %>
-      <h5>映画名</h5>
-      <div class="form-group">
-        <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "映画名" %>
-      </div>
+        <h5>映画名</h5>
+        <div class="form-group">
+          <%= sf.search_field :name_cont, class: "btn-default datepicker", placeholder: "映画名" %>
+        </div>
 
-      <h5>レート</h5>
-      <div class="form-group">
-        <%= sf.number_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "～星以上", max: 5,min: 0 %>
-      </div>
+        <h5>レート</h5>
+        <div class="form-group">
+          <%= sf.number_field :rate_score_gteq, class: "btn-default datepicker", placeholder: "～星以上", max: 5, min: 0 %>
+        </div>
 
-      <div class="form-group">
-        <%= sf.number_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "～星以下",max: 5,min: 0 %>
-      </div>
+        <div class="form-group">
+          <%= sf.number_field :rate_score_lteq, class: "btn-default datepicker", placeholder: "～星以下", max: 5, min: 0 %>
+        </div>
 
-      <h5>公開日</h5>
-      <div class="form-group">
-        <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
-      </div>
+        <h5>公開日</h5>
+        <div class="form-group">
+          <%= sf.date_field :date_gteq, class: "btn-default datepicker" %>
+        </div>
 
-      <h5>俳優名</h5>
-      <div class="form-group">
-        <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優名" %>
-      </div>
+        <h5>俳優名</h5>
+        <div class="form-group">
+          <%= sf.search_field :actors_name_cont, class: "btn-default datepicker", placeholder: "俳優名" %>
+        </div>
 
-      <div class="form-group">
-        <%= sf.submit "検索", class: "search-button btn-theme" %>
-      </div>
+        <h5>製作国</h5>
+        <div class="form-group">
+          <%= sf.collection_select :nation_eq, Nation.all, "name", "name", include_blank: true %>
+        </div>
+
+        <h5>ジャンル</h5>
+        <div class="form-group">
+          <%= sf.collection_select :category_eq, Cat.all, "name", "name", include_blank: true %>
+        </div>
+
+        <div class="form-group">
+          <%= sf.submit "検索", class: "search-button btn-theme" %>
+        </div>
       <% end %>
     </div>
   </div>
