@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'reviews/show'
 
   get 'admin/suggest_list'
+  get 'admin/actor'
   match '/suggest_confirm/:id', to: "admin#suggest_confirm", via: [:get, :post], as: :suggest_confirm
   get "/add_review", to: "reviews#add"
   get "/like_review", to: "reviews#like_review"

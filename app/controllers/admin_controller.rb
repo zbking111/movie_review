@@ -10,6 +10,12 @@ class AdminController < ApplicationController
   def user
     @users = User.paginate(page: params[:page])
   end
+
+  def actor
+     @actors = Actor.paginate(page: params[:page])
+  end
+
+
   def commentdelete
     @review = Review.find_by id: params[:id]
     # tao noti

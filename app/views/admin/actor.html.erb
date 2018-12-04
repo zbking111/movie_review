@@ -1,0 +1,26 @@
+<center><h1>削除一覧 </h1></center>
+<div class="container">
+<%= will_paginate @actors %>
+<table class="table table-hover">
+    <thead>
+      <tr class="danger">
+        <th style="padding-left: 70px;">削除名</th>
+        <th class="text-center">削除</th>
+        <th class="text-center">編集</th>
+      </tr>
+    </thead>
+    <tbody>
+       <% @actors.each do |actor| %>
+      <tr class="success">
+        <td style="padding-left: 70px;"><%= link_to actor.name, actor %></td>
+        <td class="text-center"><button type="button" class="btn btn-danger"><%= link_to "削除", actor, method: :delete, data: { confirm: "この映画を削除しますか。" } %>
+            </button>
+        </td>
+        <td class="text-center">
+          <%= link_to "編集", edit_actor_path(actor.id), class: "btn btn-success" %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+<%= will_paginate @actors %>
+</div>

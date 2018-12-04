@@ -148,11 +148,13 @@
                     <%= link_to "映画を勧める", new_movie_path %>
                   <% else %>
                     <%= link_to "映画を追加", new_movie_path %>
+                    <%= link_to "俳優を追加", new_actor_path %>
                   <% end %>
                 </li>
                   <hr>
                 <% if current_user.role == "admin" %>
                   <li><%= link_to "レビュー一覧", admin_review_path %></li>
+                  <li><%= link_to "俳優一覧", admin_actor_path %></li>
                   <li><%= link_to "オススメ映画一覧", admin_suggest_list_path %></li>
                   <li><%= link_to "映画一覧", admin_index_path %></li>
                   <li><%= link_to "ユーザー一覧", admin_user_path %></li>

@@ -9,7 +9,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-          <h4 class="modal-title">映画情報</h4>
+          <h4 class="modal-title">俳優情報</h4>
         </div>
         <div class="modal-body">
             <%= nested_form_for @actor do |f| %>
@@ -43,7 +43,7 @@
     $(document).ready(function () {
         $('#image1').attr('src');
         console.log($('#image1').attr('src'));
-        $('input[name="movie[picture]"]').on('change',function () {
+        $('input[name="actor[picture]"]').on('change',function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
