@@ -5,7 +5,7 @@ class AdminController < ApplicationController
     @movies = Movie.where(check: 1).paginate(page: params[:page])
   end
   def review
-    @reviews = Review.paginate(page: params[:page])
+    @reviews = Review.paginate(page: params[:page]).order("created_at desc")
   end
   def user
     @users = User.paginate(page: params[:page])

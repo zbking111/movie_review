@@ -9,8 +9,8 @@ class Movie < ApplicationRecord
   accepts_nested_attributes_for :characters
 
   validates :name, presence: true, length: {maximum: 100}
-  validates :picture, presence: true
-  validates :info, presence: true, length: {maximum: 1000}
+  # validates :picture, presence: true
+  # validates :info, presence: true, length: {maximum: 1000}
   validates :date, presence: true
   mount_uploader :picture, PictureUploader
 

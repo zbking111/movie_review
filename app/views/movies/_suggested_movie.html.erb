@@ -10,7 +10,7 @@
         </div>
         <div class="price pull-right">
           <div class="btn btn-sm btn-theme-confirm next-step">
-            <%= link_to "確認", suggest_confirm_path(id: suggested_movie.id) %>
+            <%= link_to "確認", edit_movie_path(id: suggested_movie.id) %>
           </div>
           <div class="btn btn-sm btn-theme-delete next-step">
             <%= link_to "削除", suggested_movie, method: :delete, data: { confirm: "「#{suggested_movie.name}」を削除しますか。" } %>
@@ -22,7 +22,6 @@
         <i class="fa fa-calendar"></i>
         <%= suggested_movie.date.year %>年<%= suggested_movie.date.month %>月<%= suggested_movie.date.day %>日
       </h5>
-      <p><%= suggested_movie.info[0..200] %></p>
     </div>
   </div>
 </div>

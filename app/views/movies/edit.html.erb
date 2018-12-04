@@ -26,19 +26,38 @@
                 <%= f.date_field :date, class: "form-control" %>
               </div>
               <div class="form-group">
+                <label for="exampleInputPassword1">ジャンル (*)</label>
+                <%= f.select :category, Cat.all.map{ |c| [c.name, c.id] },
+                {},
+                {class: "form-control"} %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">製作国 (*)</label>
+                <%= f.select :nation, Nation.all.map{ |c| [c.name, c.id] },
+                {},
+                {class: "form-control"} %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">上映時間 (*)</label>
+                <%= f.number_field :duration, class: "form-control",placeholder:"上映時間", :required => true %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">トレーラー (*)</label>
+                <%= f.text_field :trailer, class: "form-control",placeholder:"トレーラーのURL", :required => true %>
+              </div>
+              <div class="form-group">
                 <label for="exampleInputFile">写真</label>
                 <%= f.file_field :picture %>
               </div>
-              <div id="clock">
-                <center>
-                  <img src=""alt="" id ='image1' style="height: 300px;width: 500px" >
-                </center>
-              </div>
+
               <br>
-              <div class="form-group">
-                <label for="exampleInputPassword1">キャスト</label>
+              <br>
+              <div class="form-group" id="f1">
+                <label for="exampleInputPassword1">キャスト (*)</label>
                 <%= f.fields_for :characters do |task_form| %>
-                  <%= task_form.text_field :name, class:"form-control",placeholder:"俳優名" %>
+                  <%= task_form.text_field :name,placeholder:"俳優名", onclick: "change_cast()" %>
+                  <%= task_form.text_field :role,placeholder:"ロール"%>
+                  <br>
                   <%= task_form.link_to_remove "削除" %>
                 <% end %>
                 <p><%= f.link_to_add "キャストを追加", :characters %></p>

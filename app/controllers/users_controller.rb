@@ -10,10 +10,10 @@ class UsersController < ApplicationController
        "SELECT * FROM movies WHERE id IN (SELECT movie_id FROM lists WHERE user_id = ? AND list_id = 1)", @user.id
     ]
     @movies_viewed = Movie.find_by_sql [
-       "SELECT * FROM movies WHERE id IN (SELECT movie_id FROM lists WHERE user_id = ? AND list_id = 2)", @user.id
+       "SELECT * FROM movies WHERE id IN (SELECT movie_id FROM lists WHERE user_id = ? AND list_id = 3)", @user.id
     ]
     @movies_will_view = Movie.find_by_sql [
-       "SELECT * FROM movies WHERE id IN (SELECT movie_id FROM lists WHERE user_id = ? AND list_id = 3)", @user.id
+       "SELECT * FROM movies WHERE id IN (SELECT movie_id FROM lists WHERE user_id = ? AND list_id = 2)", @user.id
     ]
   end
 

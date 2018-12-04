@@ -4,6 +4,10 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
+  def suggest_movie
+    @movie = Movie.new
+  end
+
   def suki
     suki = List.find_by(user_id: current_user.id, list_id: params[:list_id], movie_id: params[:id])
     if suki
@@ -106,9 +110,12 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
+
     if !@movie.update_attributes movie_params
       flash[:danger] = "エラーが発生しました、もう一度お試しください"
     end
+    @movie.check = 1
+    @movie.save
     redirect_to admin_index_path
   end
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'suggest_movie', to: "movies#suggest_movie"
   get 'delete_noti', to: "static_pages#delete_noti"
   get 'admin/user'
   get 'admin/review' ,to: "admin#review"

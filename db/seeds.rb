@@ -23,8 +23,8 @@ kuni = ["日本", "アメリカ", "フランス", "韓国", "イギリス", "イ
 30.times do |n|
   name = Faker::Superhero.name
   info = Faker::Lorem.sentence(5)
-  cat_random = cat[rand(0..(cat.length - 1))]
-  kuni_random = kuni[rand(0..(kuni.length - 1))]
+  cat_random = rand(0..(cat.length - 1))
+  kuni_random = rand(0..(kuni.length - 1))
   Movie.create!(name: name,
                 picture: image_data,
                 info: info,

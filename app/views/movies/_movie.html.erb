@@ -9,8 +9,8 @@
     </div>
     <!-- Detail -->
     <div class="detail ">
-      <h3 style="height: 50px">
-        <%= link_to movie.name, movie_path(movie.id) %>
+      <h3 style="height: 40px">
+        <%= link_to movie.name[0..20], movie_path(movie.id) %>
       </h3>
       <h5 class="location">
         <i class="fa fa-star checked"></i>

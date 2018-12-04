@@ -134,6 +134,17 @@
               <% end %>
           <% end %>
           <% if user_signed_in? %>
+            <% if current_user.role == "admin" %>
+              <% noti = Movie.where(check: 0).count %>
+              <% if noti != 0 %>
+              <li>
+                <a href="http://localhost:3000/admin/suggest_list" ><i class="fa fa-bell" aria-hidden="true"></i><sup><%= noti %></sup></a>
+
+              </li>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if user_signed_in? %>
             <li class="dropdown">
               <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                 <%= current_user.name %><span class="caret"></span>
@@ -145,7 +156,7 @@
 
                 <li>
                   <% if current_user.role == "member" %>
-                    <%= link_to "映画を勧める", new_movie_path %>
+                    <%= link_to "映画を勧める", suggest_movie_path %>
                   <% else %>
                     <%= link_to "映画を追加", new_movie_path %>
                   <% end %>
@@ -184,4 +195,3 @@
     </div>
   </div>
 </header>
-<%= render "movies/new_movie" %>

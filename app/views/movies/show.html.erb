@@ -62,7 +62,7 @@
                   <div class="dropdown">
                     <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                       <i class="fa fa fa-plus"></i>
-                      リストに追加
+                      マイリストに追加
                     </a>
 
                     <ul class="dropdown-menu">
@@ -132,7 +132,7 @@
                       <div class="col-sm-3" style="    padding-left: 5px;    padding-right: 5px;">
                         <div class="thumbnail" >
                           <!-- <img alt="..." src="http://placehold.it/200x200"> -->
-                          <%= image_tag item.picture, style:"width: 150px; height: 150px;" %>
+                          <%= image_tag ("#{item.picture}.jpeg"), style:"width: 150px; height: 150px;" %>
                           <center><b><h5><%= item.name %></h5></b></center>
                           <center><%= item.movie_characters.where(movie_id: @movie.id).first.role %></center>
                         </div>
