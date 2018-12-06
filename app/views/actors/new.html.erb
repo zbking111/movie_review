@@ -15,7 +15,7 @@
             <%= nested_form_for @actor do |f| %>
               <div class="form-group">
                 <label for="exampleInputEmail1">俳優名 (*)</label>
-                <%= f.text_field :name, class: "form-control",placeholder:"映画名", :required => true %>
+                <%= f.text_field :name, class: "form-control",placeholder:"俳優名", :required => true %>
               </div>
 
               <div class="form-group">
@@ -43,7 +43,7 @@
     $(document).ready(function () {
         $('#image1').attr('src');
         console.log($('#image1').attr('src'));
-        $('input[name="movie[picture]"]').on('change',function () {
+        $('input[name="actor[picture]"]').on('change',function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {

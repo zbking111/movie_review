@@ -25,12 +25,14 @@ class ActorsController < ApplicationController
 
   def update
     @actor = Actor.find(params[:id])
+    redirect_to admin_actor_path
   end
 
   def destroy
     @actor = Actor.find(params[:id])
     @actor.destroy
     flash[:success] = "削除しました"
+    redirect_to admin_actor_path
   end
   private
 
