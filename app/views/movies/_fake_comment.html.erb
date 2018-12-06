@@ -1,0 +1,209 @@
+<% review = Review.new(user_id: current_user.id, movie_id: movie.id, content: " ") %>
+<% rate = Rate.new(user_id: current_user.id, movie_id: movie.id, rate: 0) %>
+<% if user_signed_in? %>
+<% id_div = "my-div" if review.user_id == current_user.id  %>
+<% end %>
+<div class="panel panel-white post panel-shadow" id="<%=id_div%>">
+  <div class="post-heading">
+    <div class="pull-left image">
+      <% if review.user.picture.blank? %>
+        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+      <% else %>
+        <%= image_tag review.user.picture_url, class: "img-circle avatar" %>
+      <% end %>
+    </div>
+    <div class="pull-left meta">
+      <div class="title h5">
+        <a href="#"><b><%= review.user.name %></b></a>
+        <!-- made a post. -->
+      </div>
+      <h6 class="text-muted time">1分前</h6>
+    </div>
+    <div class="pull-right meta">
+      <section class="rating-widget">
+        <!-- Rating Stars Box -->
+        <div class="rating-stars text-center">
+          <ul >
+            <% if user_signed_in? %>
+            <% id_star = "my-star" if review.user_id == current_user.id %>
+            <% end %>
+            <% for i in 1..5 %>
+              <% if i <= rate.rate %>
+                <li class="star selected" id="<%=id_star%><%=i%>">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+              <% else %>
+                <li class="star" id="<%=id_star%><%=i%>">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+              <% end %>
+            <% end %>
+
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div class="post-description">
+
+    <p>
+      <% if user_signed_in? %>
+        <% if review.user_id == current_user.id %>
+          <span id="my-review">
+            <%= review.content %>
+          </span>
+        <% end %>
+      <% else %>
+        <span>
+          <%= review.content %>
+        </span>
+      <% end %>
+    </p>
+    <div class="stats">
+      <% if user_signed_in? %>
+        <% likeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+        <% unlikeColor = "color: #42a4f4;" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+
+        <% likeName = "like" if review.review_actions.where(user_id: current_user.id, action: 1).count == 1 %>
+        <% likeName = "unlike" if review.review_actions.where(user_id: current_user.id, action: 2).count == 1 %>
+        <% likeName = "none" if review.review_actions.where(user_id: current_user.id).count == 0 %>
+        <a  class="btn btn-default stat-item" onclick="like_review(<%= review.id %>,<%= current_user.id %>)" id="like<%= review.id %>" name="<%= likeName %>" style="<%= likeColor %>">
+          <i class="fa fa-thumbs-up icon"></i>
+          <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
+        </a>
+        <a  class="btn btn-default stat-item" onclick="unlike_review(<%= review.id %>,<%= current_user.id %>)" id="unlike<%= review.id %>" style="<%= unlikeColor %>">
+          <i class="fa fa-thumbs-down icon"></i>
+          <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
+        </a>
+        <% id_but = "my-but" if review.user_id == current_user.id %>
+        <% if review.user_id == current_user.id %>
+        <button type="button" id="<%=id_but%>"> 削除 </button>
+        <% end %>
+      <% else %>
+        <a  class="btn btn-default stat-item" >
+            <i class="fa fa-thumbs-up icon"></i>
+            <span id="slike<%= review.id %>"><%= review.review_actions.where(action: 1).count %></span>
+          </a>
+          <a  class="btn btn-default stat-item" >
+            <i class="fa fa-thumbs-down icon"></i>
+            <span id="ulike<%= review.id %>"><%= review.review_actions.where(action: 2).count %></span>
+          </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function like_review(id,user_id){
+    var name1 = $('#like'+id).attr("name");
+    if(name1 == "like")
+    {
+      // delete like function
+      $('#like'+id).css("color", "#333");
+      var sv = parseInt($('#slike'+id).text()) - 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","none");
+
+        const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=0';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+
+      return ;
+    }
+    if(name1 == "none")
+    {
+      $('#like'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#slike'+id).text()) + 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","like");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=1';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "unlike"){
+      $('#unlike'+id).css("color", "#333");
+      var sv = parseInt($('#ulike'+id).text()) - 1;
+      $('#ulike'+id).text(""+sv);
+
+      $('#like'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#slike'+id).text()) + 1;
+      $('#slike'+id).text(""+sv);
+      $('#like'+id).attr("name","like");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=1';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+
+    // $('#like'+id).attr("name","unlike");
+    // var name1 = $('#like'+id).attr("name");
+    // alert(name1);
+    // alert(sv);
+    // alert("hi "+id);
+    // $('#like'+id).style.color = #42a4f4;
+  }
+  function unlike_review(id, user_id){
+    var name1 = $('#like'+id).attr("name");
+    if(name1 == "unlike")
+    {
+      // delete like function
+      $('#unlike'+id).css("color", "#333");
+      var sv = parseInt($('#ulike'+id).text()) - 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","none");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=0';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "none")
+    {
+      $('#unlike'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#ulike'+id).text()) + 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","unlike");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=2';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+    if(name1 == "like"){
+      $('#like'+id).css("color", "#333");
+      var sv = parseInt($('#slike'+id).text()) - 1;
+      $('#slike'+id).text(""+sv);
+
+      $('#unlike'+id).css("color", "#42a4f4");
+      var sv = parseInt($('#ulike'+id).text()) + 1;
+      $('#ulike'+id).text(""+sv);
+      $('#like'+id).attr("name","unlike");
+
+      const LOCAL_PATH = "http://0.0.0.0:3000";
+        const URL_TEST = LOCAL_PATH;
+        var xhttp = new XMLHttpRequest();
+        var url = URL_TEST+'/like_review?review[review_id]='+id+'&review[user_id]='+user_id+'&review[action]=2';
+        xhttp.open('GET', url, true);
+        xhttp.send();
+      return ;
+    }
+  }
+</script>
