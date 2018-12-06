@@ -15,7 +15,7 @@
             <%= nested_form_for @actor do |f| %>
               <div class="form-group">
                 <label for="exampleInputEmail1">俳優名</label>
-                <%= f.text_field :name, class: "form-control",placeholder:"映画名" %>
+                <%= f.text_field :name, class: "form-control",placeholder:"俳優名" %>
               </div>
               <div class="form-group">
                 <label for="exampleInputFile">写真</label>
@@ -26,7 +26,7 @@
                   <img src=""alt="" id ='image1' style="height: 300px;width: 500px" >
                 </center>
               </div>
-            
+
               <%= f.submit "完了" %>
               <!--<button type="submit" class="btn btn-default">Submit</button>-->
             <% end %>
@@ -44,7 +44,7 @@
     $(document).ready(function () {
         $('#image1').attr('src');
         console.log($('#image1').attr('src'));
-        $('input[name="movie[picture]"]').on('change',function () {
+        $('input[name="actor[picture]"]').on('change',function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
